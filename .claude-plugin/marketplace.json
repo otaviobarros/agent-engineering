@@ -1,0 +1,15 @@
+{
+  "name": "agent-engineering",
+  "owner": {
+    "name": "Otavio Barros"
+  },
+  "plugins": [
+    {
+      "name": "agent-engineering",
+      "source": "./plugins/agent-engineering",
+      "description": "Skills for planning and delivering software changes.",
+      "category": "Productivity"
+    }
+  ],
+  "description": "Skills for planning and delivering software changes."
+}
