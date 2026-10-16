@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "agent-engineering",
-      "source": "./plugins/agent-engineering",
+      "source": "./",
       "description": "Skills for planning and delivering software changes.",
       "category": "Productivity"
     }
