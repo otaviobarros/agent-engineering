@@ -110,4 +110,5 @@ Merge, release, deployment, and monitoring require separate authorization.
 
 [Report an issue](https://github.com/otaviobarros/agent-engineering/issues) ·
 [Workflow contract](https://github.com/otaviobarros/agent-engineering/blob/main/references/workflow-contract.md) ·
-[MIT License](https://github.com/otaviobarros/agent-engineering/blob/main/LICENSE)
+[MIT License](https://github.com/otaviobarros/agent-engineering/blob/main/LICENSE) ·
+[Privacy policy](PRIVACY.md)
