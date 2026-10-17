@@ -1,9 +1,18 @@
 {
   "name": "agent-engineering",
-  "version": "0.2.0",
-  "description": "Reusable skills for optional project setup, planning, implementation, verification, independent review, remediation, publication, and delivery.",
+  "version": "0.2.1",
+  "description": "A playbook for coding agents: plan changes, implement with checks, review independently, and publish within your limits.",
   "author": {
     "name": "Otavio Barros"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://github.com/otaviobarros/agent-engineering",
+  "repository": "https://github.com/otaviobarros/agent-engineering",
+  "keywords": [
+    "coding-agents",
+    "workflow",
+    "code-review",
+    "codex",
+    "claude-code"
+  ]
 }

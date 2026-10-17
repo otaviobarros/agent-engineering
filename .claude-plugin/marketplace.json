@@ -7,9 +7,9 @@
     {
       "name": "agent-engineering",
       "source": "./",
-      "description": "Skills for optional project setup, planning, reviewing, and publishing software changes.",
+      "description": "A playbook for coding agents: plan changes, implement with checks, review independently, and publish within your limits.",
       "category": "Productivity"
     }
   ],
-  "description": "Skills for optional project setup, planning, reviewing, and publishing software changes."
+  "description": "A playbook for coding agents: plan changes, implement with checks, review independently, and publish within your limits."
 }

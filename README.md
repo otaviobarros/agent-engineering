@@ -1,110 +1,109 @@
 # agent-engineering
 
-Reusable skills for AI-assisted software development. Plan, implement, verify,
-review, remediate, or publish a change. Use delivery mode to carry an authorized change
-through the workflow.
-Optionally map your project's standards and workflow conventions with `setup-project`.
+![Give your coding agent a playbook. Plan clearly. Check the work. Review before you ship.](branding/cover.png)
 
-## Skills
+**From “build this” to a reviewed draft PR.**
 
-| Skill | Purpose |
-|---|---|
-| `setup-project` | Discover project authorities, discuss adoption choices, and create or refresh a small workflow guide; stop before policy migration or implementation. |
-| `plan-change` | Define scope, acceptance criteria, implementation steps, and verification needs; stop with a plan for review. |
-| `implement-change` | Implement an accepted plan with code, tests, documentation, and a handoff; stop before independent review or publication. |
-| `verify-change` | Check a change against acceptance criteria and report results, freshness, and required gaps; stop before fixes or publication. |
-| `review-change` | Review a change against requirements and project rules, validate findings, and report evidence gaps. |
-| `review-pr` | Use review-change to assess a GitHub PR, then publish authorized finding threads, a summary, and a justified review decision. |
-| `remediate-findings` | Validate findings, correct authorized defects, and obtain verification and fresh independent re-review; stop before publication. |
-| `publish-change` | Commit, push, and create a draft PR within authority; verify published state and reconcile interrupted attempts. |
-| `deliver-change` | Coordinate implementation and authorized delivery, preserving the limits of the request. |
+Nine skills for **Codex and Claude Code**. Clear plans. Checks you can inspect.
+Independent review. Your project's rules.
 
-All skills use the included shared workflow contract. They provide agent
-instructions; the host controls permissions and execution. Explicit limits such
-as "do not commit" remain binding throughout the workflow.
-Publication covers Git and pull requests. Merge, release, and deployment require
-separate authorization and workflows.
+Use one skill for the next step, or `deliver-change` for the whole workflow.
+**You choose the finish line.**
 
-## Installation
+## Install
 
-Register the marketplace in your host.
-
-For Codex CLI:
+**Codex CLI**
 
 ```sh
 codex plugin marketplace add otaviobarros/agent-engineering
 codex plugin add agent-engineering@agent-engineering
 ```
 
-For Claude Code:
+**Claude Code**
 
 ```sh
 claude plugin marketplace add otaviobarros/agent-engineering
 claude plugin install agent-engineering@agent-engineering
 ```
 
-Install the complete plugin to retain its shared references. All nine skills become
-available; invoke each independently. Copying only an individual skill
-directory is not supported.
+Install the complete plugin to keep its shared references. All nine skills can
+be invoked independently; copying a single skill folder is not supported.
 
-## Usage
+## Teach it how your project works
 
-> Use setup-project to map our project standards and workflow conventions. Ask which
-> adoption approach I want, preserve existing authorities, and save a concise guide.
+**Recommended first step: `setup-project`.** Give your agent a map of your
+standards, architecture, checks, and commit/PR conventions. Less repeated context.
+A clearer starting point for every change.
 
-> Use plan-change to plan quantity validation. Return the plan for review before
-> making changes.
+> Use setup-project to map this project's standards and workflow. Ask about gaps
+> and adoption choices. Save a concise guide and link it from existing agent
+> instructions where needed. Preserve our standards.
 
-> Use implement-change to implement the accepted plan with tests and documentation.
-> Return the implementation handoff without starting review or publication.
+It reads existing guidance, discusses material gaps and adoption choices, then
+creates or refreshes a small project guide, usually `docs/agent-engineering.md`.
+Authorized references in `AGENTS.md` or `CLAUDE.md` help later skills find it.
+Existing authorities still govern; proposed practices need acceptance.
 
-> Use verify-change to verify the current changes against the accepted criteria.
-> Report evidence and gaps without changing code or publishing anything.
+Setup is optional and does not run automatically on installation.
 
-> Use review-change to review this branch against the accepted requirements.
-> Return findings without changing code or publishing comments.
+## Bring a task. Choose the finish line.
 
-> Use review-pr to review PR #42 and post findings as threads with a summary.
-> If the required review is complete and clean, approve it; otherwise report the gaps.
-> Preserve the code. If formal approval is unavailable, state that in a comment.
+**Take an issue to a draft PR.** Replace `ISSUE_URL` with a link, or describe the
+change directly.
 
-> Use remediate-findings to assess these review findings and fix confirmed defects
-> within the accepted scope. Verify and obtain independent re-review; do not commit.
+> Use deliver-change to implement ISSUE_URL. Follow project standards and ask
+> about material decisions. Once required checks and independent review pass,
+> commit, push, and open a draft PR linked to the issue. Do not merge or deploy.
 
-> Use publish-change to commit the verified and reviewed changes, push this branch,
-> and create a draft PR. Preserve unrelated work and existing publication limits.
+Plan → implement → verify → independently review → remediate when needed → publish.
+The handoff shows what changed, what was checked, findings, and remaining gaps.
 
-> Use deliver-change to implement the accepted plan. Run the required checks,
-> obtain independent review, and leave the changes uncommitted.
+**Want to inspect the work first?** Replace the publication request with:
 
-## Optional project setup
+> Leave everything uncommitted for my review. Do not push or create a PR.
 
-Setup reuses an existing project guide or, where project conventions permit, creates
-`docs/agent-engineering.md`. It links to current standards, decisions, requirements,
-checks and collaboration guidance rather than replacing those sources.
+**Think it through before touching code.**
 
-Choose to preserve and complement existing standards or adopt the recommended
-baseline. The guide separates established requirements, accepted setup choices,
-proposals, pending decisions and declined recommendations. Choosing an approach
-does not approve every proposal or authorize migration.
+> Use plan-change to plan checkout quantity validation. Define scope, acceptance
+> criteria, and checks. Return the plan for review before making changes.
 
-When needed and authorized, setup adds a short reference to existing agent instructions
-and preserves host imports. It does not automatically create `CONTEXT.md`, ADRs,
-rule IDs or a standards system.
+**Put useful feedback where the work happens.**
 
-Installation does not run setup. Other skills work without a guide or adoption choice
-and discover project authorities normally. Setup does not run project procedures,
-implement code or publish changes.
+> Use review-pr to review PR #42 and post prioritized findings as threads with a
+> summary. Approve only if the required review is complete, current, and clean.
+> If that clean result cannot receive formal approval, leave an explicit approval
+> comment with the reason. Preserve the code.
 
-## Status
+Issue and task links need access through your host's tools. If access is missing,
+provide the task text. A link alone does not select a workflow or authorize
+tracker comments, status changes, or task closure.
 
-Experimental. Intended for Codex CLI and Claude Code.
+## Pick the result you need
 
-Report problems through this repository's issues. Include the host and version,
-expected behavior, observed behavior, and a reproducible example with private
-information removed.
+| Skill | What you get |
+|---|---|
+| `setup-project` | Your project's standards, decisions, and checks mapped for the agent. |
+| `plan-change` | Clear scope, acceptance criteria, and open decisions before code. |
+| `implement-change` | Scoped code, tests, and docs from an accepted plan. |
+| `verify-change` | What passed, what failed, and what remains unverified. |
+| `review-change` | Validated findings with impact and evidence. |
+| `review-pr` | Prioritized PR threads, a concise summary, and a justified review decision. |
+| `remediate-findings` | Confirmed defects corrected, verified, and independently reviewed again. |
+| `publish-change` | Authorized commits, push, and a draft PR, with remote effects verified. |
+| `deliver-change` | The full workflow, with your scope and stopping point preserved. |
 
-## License
+## Your project. Your rules.
 
-Original code and documentation are licensed under the MIT License included in
-this repository.
+Setup is optional. Existing project authorities remain in place. Each standalone
+skill stops at its phase boundary. Limits such as “do not commit” persist across
+the workflow and resumed work.
+
+These skills guide agents; the host controls permissions and execution. Missing
+required checks or independent review leave dependent delivery incomplete.
+Merge, release, deployment, and monitoring require separate authorization.
+
+**Experimental.** Results depend on the model, host capabilities, and project.
+
+[Report an issue](https://github.com/otaviobarros/agent-engineering/issues) ·
+[Workflow contract](https://github.com/otaviobarros/agent-engineering/blob/main/references/workflow-contract.md) ·
+[MIT License](https://github.com/otaviobarros/agent-engineering/blob/main/LICENSE)
