@@ -19,10 +19,12 @@ Spec coverage. Code and commit messages alone do not establish intended
 behavior.
 
 Inspect the change and its affected interfaces before selecting reviewers.
-Preserve application code and unrelated work. Use checks whose side effects fit
-review authority. Run checks that modify resources in an authorized disposable
-environment. Changes, commits, remote comments, thread resolution, and approval
-each require their own applicable authorization under the contract.
+Preserve application code and unrelated work. Analyze files and existing check
+evidence by default. Follow the contract's review execution limit: project tests
+require an explicit user request for this review, including for delegated reviewers.
+Keep any requested execution within scope and use authorized disposable resources
+when it modifies state. Changes, commits, remote comments, thread resolution, and
+approval each require their own applicable authorization under the contract.
 
 Done when the review has an identifiable candidate, authoritative inputs or
 named gaps, and a clear boundary for investigation.
@@ -80,11 +82,11 @@ same uncommitted inputs as the coordinator. A separate worktree with only HEAD
 is not an equivalent candidate when local edits are part of the target. Use only
 approved project access and delegation destinations. Report inaccessible inputs.
 
-Assign each expensive shared check to one owner, either the coordinator or a
-reviewer. Share its command, the candidate and configuration checked, its
-result, and its evidence with the other reviewers. Reviewers assess that
-evidence independently. Repeat a check when inputs changed, evidence is
-inadequate, or a specific concern requires it.
+Share existing check evidence with reviewers, who assess it independently.
+When the user requests test execution for the review, assign each selected check
+to one owner. Share its command, checked candidate and configuration, result, and
+evidence. Repeat only within the requested scope when inputs changed or a concrete
+concern requires it. A reviewer or evidence gap cannot expand execution authority.
 
 Keep first-pass findings independent. Share other reviewers' conclusions only
 when validating or resolving a specific disagreement. Request short findings,
@@ -126,10 +128,10 @@ supporting evidence or is explicitly an unresolved question.
 
 Use the shared contract's finding dispositions. Deduplicate root causes and
 validate both lone and repeated findings. Vote counts do not determine
-correctness. Resolve disagreements with source evidence or a bounded permitted
-check. Leave unresolved evidence gaps visible. Stop expanding review when the
-scoped coverage is complete. Further investigation needs a concrete unanswered
-risk.
+correctness. Resolve disagreements with source and existing evidence, or tests
+explicitly requested for this review. Leave unresolved evidence gaps visible.
+Stop expanding review when scoped coverage is complete. Further investigation
+needs a concrete unanswered risk.
 
 Prioritize validated findings by impact. For each, include severity, axis,
 location, triggering condition, expected versus observed behavior, evidence, and
@@ -141,7 +143,8 @@ during review.
 
 Before returning, compare the current revision and relevant staged, unstaged,
 and untracked inputs with the candidate you reviewed. Refresh affected review
-and checks when inputs changed. Keep earlier results bound to their original
+and reassess check evidence when inputs changed. Refresh requested tests only
+within the user's execution scope. Keep earlier results bound to their original
 candidate until refreshed. Report incomplete review when freshness or required
 coverage remains unverified.
 
@@ -149,8 +152,9 @@ Then return candidate identity, review arrangement and completed coverage,
 findings, unresolved questions, checks and limitations, and the next required
 action. State the final freshness outcome and identify any changed inputs.
 Distinguish current check results from superseded results and name any remaining
-gaps. Report no findings when appropriate, without implying unavailable checks
-passed.
+gaps. Separate existing check evidence, tests explicitly requested and run, and
+tests not run. Report no findings when appropriate, without implying unavailable
+or unexecuted checks passed.
 
 Standalone review ends here. In delivery mode, return the report to the caller.
 The shared contract governs remediation, bounded re-review, and publication.

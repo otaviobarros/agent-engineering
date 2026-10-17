@@ -127,6 +127,18 @@ do not substitute for acceptance.
 
 ## Independent review and remediation
 
+During review, analyze source, diffs, requirements, tests, and existing check
+evidence. Run project tests only when the user explicitly requests test execution
+for the review. This limit includes focused tests, suites, test-triggering wrappers,
+delegated reviewers, and disposable environments. Existing test requirements alone
+do not authorize execution during review. Authorized implementation, verification,
+and remediation retain their test execution scope.
+
+Report tests not run separately from existing results. Skipping test execution
+does not by itself make source review incomplete. If a conclusion depends on
+missing execution evidence, report that gap; do not run tests to fill it without
+the user's request. Required verification and publication gates still apply.
+
 Use fresh review covering Standards, Spec, Bugs, Quality, and Security. Supply
 requirements, policy, candidate/diff, and neutral operational context rather than
 the implementer's preferred verdict. One fresh reviewer can cover small changes.

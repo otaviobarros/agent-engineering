@@ -74,6 +74,9 @@ The handoff shows what changed, what was checked, findings, and remaining gaps.
 > If that clean result cannot receive formal approval, leave an explicit approval
 > comment with the reason. Preserve the code.
 
+Reviews analyze your changes and existing check evidence. Tests run during review
+only when you ask. Full delivery still includes verification.
+
 Issue and task links need access through your host's tools. If access is missing,
 provide the task text. A link alone does not select a workflow or authorize
 tracker comments, status changes, or task closure.
