@@ -1,6 +1,6 @@
 # Shared workflow contract
 
-This contract defines the common behavior of the phase skills.
+This contract defines the common behavior of the workflow skills.
 It describes guided procedures, not mechanical enforcement or tested host support.
 
 ## Authority and entry
@@ -26,6 +26,23 @@ the work. A prototype or experiment needs authority for its own actions; a quest
 does not grant it. Proceed with routine choices already authorized. Continue
 unaffected work while a decision is pending. Silence is not approval.
 
+## Project context
+
+Follow the project workflow guide named by applicable instructions. If none is
+named, check `docs/agent-engineering.md` when present. Read its applicable sources
+in their current state. The guide owns navigation and otherwise unowned
+setup choices; existing project authorities still govern. Proposed improvements
+are not active rules. A guide does not grant permissions or prove checks passed.
+
+Use [setup-project](../skills/setup-project/SKILL.md) for requested project setup
+or refresh. Setup is optional: installation and delivery do not invoke it
+automatically. A guide or adoption preference is not a prerequisite for other
+skills; when absent, discover project sources normally. Material unresolved
+decisions still block dependent work under this contract.
+
+Setup stops after the context guide and authorized instruction references.
+Policy migration, implementation and publication require separate authority.
+
 ## Phase boundaries
 
 Users can invoke each phase skill separately. The `deliver-change` skill provides
@@ -39,8 +56,9 @@ Each standalone phase stops at its own completion boundary:
 - Verification produces evidence and gaps.
 - Review produces validated findings and unresolved questions.
 - Remediation produces corrections and evidence of their verification.
+- Publication performs authorized operations and reports their observed state.
 
-None of these phases independently authorizes publication.
+Invoking a phase does not itself authorize publication.
 
 A full-delivery request includes implementation, verification, independent review,
 coherent commits, push, and draft PR creation after applicable gates, subject to

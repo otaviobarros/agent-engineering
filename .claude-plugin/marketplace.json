@@ -7,9 +7,9 @@
     {
       "name": "agent-engineering",
       "source": "./",
-      "description": "Skills for planning and delivering software changes.",
+      "description": "Skills for optional project setup, planning, reviewing, and publishing software changes.",
       "category": "Productivity"
     }
   ],
-  "description": "Skills for planning and delivering software changes."
+  "description": "Skills for optional project setup, planning, reviewing, and publishing software changes."
 }
