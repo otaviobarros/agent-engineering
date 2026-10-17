@@ -32,17 +32,18 @@ be invoked independently; copying a single skill folder is not supported.
 ## Teach it how your project works
 
 **Recommended first step: `setup-project`.** Give your agent a map of your
-standards, architecture, checks, and commit/PR conventions. Less repeated context.
-A clearer starting point for every change.
+code, standards, architecture, and checks. Turn hidden conventions into clear guidance.
+Find gaps before they become repeated mistakes.
 
-> Use setup-project to map this project's standards and workflow. Ask about gaps
-> and adoption choices. Save a concise guide and link it from existing agent
-> instructions where needed. Preserve our standards.
+> Use setup-project to explore this codebase and interview me about gaps and
+> improvements. Propose a documentation baseline and default workflow adoption.
+> Write accepted docs and instruction references. Preserve our existing standards.
 
-It reads existing guidance, discusses material gaps and adoption choices, then
-creates or refreshes a small project guide, usually `docs/agent-engineering.md`.
-Authorized references in `AGENTS.md` or `CLAUDE.md` help later skills find it.
-Existing authorities still govern; proposed practices need acceptance.
+It uses a low-cost discovery agent when available, checks the findings, and asks
+focused questions with recommendations. You choose the practices to adopt and
+whether matching tasks should use the plugin workflow by default. Accepted docs
+and references in `AGENTS.md` or `CLAUDE.md` carry those choices into later tasks.
+Existing authorities still govern; setup runs no project tests or implementation.
 
 Setup is optional and does not run automatically on installation.
 
@@ -85,7 +86,7 @@ tracker comments, status changes, or task closure.
 
 | Skill | What you get |
 |---|---|
-| `setup-project` | Your project's standards, decisions, and checks mapped for the agent. |
+| `setup-project` | Codebase discovery, focused questions, and engineering guidance you choose to adopt. |
 | `plan-change` | Clear scope, acceptance criteria, and open decisions before code. |
 | `implement-change` | Scoped code, tests, and docs from an accepted plan. |
 | `verify-change` | What passed, what failed, and what remains unverified. |

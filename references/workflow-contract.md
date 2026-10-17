@@ -40,7 +40,11 @@ automatically. A guide or adoption preference is not a prerequisite for other
 skills; when absent, discover project sources normally. Material unresolved
 decisions still block dependent work under this contract.
 
-Setup stops after the context guide and authorized instruction references.
+Setup can discover code patterns, interview project owners, and write accepted
+baseline documentation and instruction references. An explicit workflow adoption
+choice can route matching tasks to installed skills. It preserves standalone phase
+boundaries and task-specific permissions; baseline adoption alone does not select it.
+Setup stops after agreed documentation. It does not start delivery or execute tests.
 Policy migration, implementation and publication require separate authority.
 
 ## Phase boundaries

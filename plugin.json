@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "agent-engineering",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A playbook for coding agents: plan changes, implement with checks, review independently, and publish within your limits.",
   "author": {
     "name": "Otavio Barros"
