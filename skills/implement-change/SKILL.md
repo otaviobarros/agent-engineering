@@ -5,79 +5,74 @@ description: Implement an accepted software change plan with scoped code, tests,
 
 # Implement change
 
-Produce the authorized changes and usable verification inputs.
-Read the [shared workflow contract](../../references/workflow-contract.md) before starting.
-The plugin includes this reference. Keep its directory layout intact.
+Produce the authorized changes and usable verification inputs. First read the
+[contract core](../../references/workflow-contract.md) and the
+[verification rules](../../references/verification.md).
 
 ## 1. Confirm the plan and authority
 
-Identify the requirements owner, accepted plan, acceptance criteria, authorized
-slice, and explicit limits. Confirm the actual workspace, branch, revision, and
-relevant existing changes under the shared contract. Preserve unrelated work,
-including existing staged and untracked content.
+- Identify the requirements owner, accepted plan, criteria, authorized slice, and
+  limits. Confirm workspace, branch, revision, and existing staged and untracked
+  changes.
+- Revalidate the plan against current inputs and reuse its valid decisions. Open
+  criterion or material decision → report it and keep dependent work pending.
+- An accepted plan alone does not authorize edits.
 
-Revalidate the accepted plan against current inputs. Inspect observable facts
-before asking for missing intent. If criteria or material decisions remain
-unresolved, report the decision needed and keep dependent implementation pending.
-Continue unaffected authorized work. An accepted plan alone does not authorize edits.
+**Checkpoint 1:** the slice has an accepted expected result and implementation
+authority, or a clear blocker.
 
-Done when the slice has an accepted expected result and implementation authority,
-or a clear blocker. Reuse valid decisions rather than creating a second plan.
+## 2. Ground the slice
 
-## 2. Inspect the slice and establish evidence
+- Trace affected entrypoints, callers, contracts, test procedures, and executable
+  check configuration. Pick the smallest coherent changes and the plan's checks,
+  following project conventions and existing interfaces. Material redesign or
+  scope expansion → get a decision.
+- Bug fix → capture original-failure evidence before corrective edits when
+  available; otherwise state the limitation.
 
-Trace the affected entrypoints, callers, contracts, and existing test procedures.
-Read executable check configuration. Identify the smallest coherent changes and
-the applicable checks from the accepted plan. Use project conventions and existing
-interfaces; obtain a decision before a material redesign or scope expansion.
+**Checkpoint 2:** edits and test expectations rest on inspected code and accepted
+criteria. Pre-existing failures are recorded separately.
 
-For a bug fix, capture original-failure evidence before corrective edits when
-available. State missing reproduction as a limitation. A setup failure does not
-demonstrate the bug. Derive expected results from the requirements or an independent
-oracle under the shared contract.
+## 3. Implement
 
-Done when the edits and test expectations are grounded in inspected code and
-the accepted criteria. Record relevant pre-existing failures separately.
+- Make scoped code, test, and documentation changes; keep accepted behavior
+  outside the slice. Apply the verification rules. A bug regression exercises the
+  interface where the original failure occurred.
+- Reuse project test mechanisms. Propose missing infrastructure and its scope
+  before adding it within authority; beyond scope it is a required gap.
+- Dependency installation, migrations, external effects, and experiments need
+  their own authority; the plan does not expand execution permission.
+- Run relevant development checks within authority and record command, candidate,
+  outcome, and limitation. Keep evidence before cleaning up resources you created.
+- Fix scoped defects within the three-round limit in the
+  [review rules](../../references/review.md#remediation-rounds). A blocked
+  required check leaves unaffected work free to continue.
 
-## 3. Implement the coherent slice
+**Checkpoint 3:** authorized edits, tests, and docs are present, or incomplete items
+are explicit. A passing local check is not full verification.
 
-Make scoped code, test, and documentation changes. Preserve accepted behavior
-outside the slice. Apply the shared contract's test selection, stable case identity,
-criterion mapping, and defect-detection requirements. Feature TDD remains optional.
-For a bug regression, exercise the interface where the original failure occurred.
+## 4. Inspect and hand off
 
-Reuse project test mechanisms. Propose missing infrastructure and its scope before
-adding it within existing authority. Report a required gap when that work exceeds
-scope. Dependency installation, migrations, external effects, and experiments need
-authority for their own actions; the plan does not expand execution permissions.
+After the last edit and check, compare the final diff, staged and untracked
+contents, branch, and revision with the slice and existing work. Run the
+contract's freshness check for earlier evidence. Then hand off in an authorized
+record or the response:
 
-Run relevant development checks within authority. Record actual commands, candidate
-inputs, outcomes, and limitations. Preserve evidence before cleaning up resources
-the run created. Address scoped defects under the shared remediation limits;
-continue useful unaffected work when a required check is blocked.
+```text
+Behavior implemented:
+Criteria affected: (reference the plan)
+Checks: command | candidate | result | limitation
+Not verified: criteria whose required check did not run, and why
+Final inspection: branch, revision, dirty inputs, scope and preservation result
+Remaining work, gaps, next action:
+```
 
-Done when the authorized edits, tests, and documentation are present, or incomplete
-items are explicit. Passing a local check does not establish full verification.
+Carry `Not verified` into any status the user asks for.
 
-## 4. Inspect the final changes and hand off
+Incomplete inspection → name the missing evidence and mark the handoff incomplete.
 
-After the last edit and development check, inspect the final diff, relevant staged
-and untracked contents, branch, and current revision.
-Check the result against the accepted slice and existing work. Renew affected
-check evidence when relevant inputs changed; retain earlier results against their
-earlier candidate. Report incomplete freshness as a gap.
-
-Return the implemented behavior, affected criteria, actual check
-results, remaining work, and next action. Reference the authoritative plan and
-evidence rather than creating duplicate editable requirements. Update records only
-at authorized destinations; otherwise provide the handoff in the response.
-
-Report the final inspection outcome with the observed branch, revision, relevant
-dirty inputs, and scope/preservation result. If inspection is incomplete, name the
-missing evidence and report the handoff as incomplete.
-
-Done when changes and verification inputs are accounted for, with failures and
-required gaps visible. Distinguish implementation completion from verification,
-independent review, and delivery readiness. Standalone implementation stops here.
-A separately authorized delivery workflow can continue with verify-change and
-review-change. This skill does not authorize commits, pushes, or publication.
+**Done when** changes and verification inputs are accounted for, with failures and
+gaps visible, and every criterion whose required check did not run is listed under
+`Not verified` in the handoff and any requested status. Implementation completion is not verification, review, or delivery
+readiness. A standalone request stops here; authorized delivery continues with
+verify-change and review-change. No commits, pushes, or publication.

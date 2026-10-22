@@ -5,91 +5,84 @@ description: Plan a software change or revise an existing plan. Define acceptanc
 
 # Plan change
 
-Produce a plan grounded in the project's requirements and current implementation.
-Reuse accepted decisions and valid plans. Keep detail proportional to the change.
+Produce a plan grounded in the project's requirements and current code. Reuse
+accepted decisions and valid plans; keep detail proportional to the change. First
+read the [contract core](../../references/workflow-contract.md) and the
+[verification rules](../../references/verification.md).
 
-Before beginning, read the [shared workflow contract](../../references/workflow-contract.md).
-The plugin includes this reference. Keep the plugin directory layout intact.
+## 1. Scope and ownership
 
-## 1. Establish scope and ownership
+- Identify the requested outcome, planning authority, exclusions, and the owner of
+  the requirements and plan. Separate desired behavior from observations and
+  assumptions.
+- An accepted plan covers the request → revalidate affected inputs and propose
+  only necessary amendments.
+- List questions that could change the plan. Answer observable ones by
+  inspection; ask for missing intent and material decisions.
 
-Identify the requested outcome, planning authority, exclusions, and the selected
-owner of the requirements and plan. Separate desired behavior from observations
-and assumptions. If an accepted plan covers the request, revalidate affected
-inputs and propose only necessary amendments.
-
-Done when the source of the requirements and the scope are clear. List unresolved
-questions that could change the plan. Inspect observable facts before asking the
-user to supply them. Ask for missing intent or material decisions under the shared
-contract. Keep dependent work pending and investigate unaffected parts.
+**Checkpoint 1:** the requirements source and scope are clear.
 
 ## 2. Inspect the affected behavior
 
-Trace the relevant entrypoints, callers, data, contracts, tests, and documentation.
-Identify the boundaries and recovery behavior that the change touches. For an
-uncertain interface, sketch how its caller would use it before choosing its shape.
-Read executable configuration for checks. Consult current primary documentation
-when dependency-specific facts matter, using the project's configured tools.
+- Trace entrypoints, callers, data, contracts, tests, and docs, including the
+  boundaries and recovery behavior the change touches. For an uncertain interface,
+  sketch its caller's use before choosing its shape.
+- Read executable check configuration. Consult current primary documentation with
+  the project's tools when dependency facts matter.
+- Bug → gather existing original-failure evidence or name the smallest safe
+  reproduction. Read-only checks may run when permitted. Repro files, dependency
+  provisioning, or application edits need their own authority; propose them.
 
-For a bug, gather the existing original-failure evidence or identify the smallest
-safe reproduction needed. With planning authority, run relevant read-only checks
-when permitted. Creating repro files, provisioning dependencies, or modifying
-application code requires appropriate authority; propose these if outside scope.
+**Checkpoint 2:** the plan cites inspected code and test locations, separates
+observations from hypotheses, and states what inspection could not establish.
 
-Done when the plan points to inspected code and places to test the behavior.
-Distinguish observations from hypotheses and state what the inspection could not establish.
+## 3. Acceptance and decisions
 
-## 3. Define acceptance and decisions
+- Draft observable acceptance criteria and exclusions for the owner, reusing
+  existing criterion IDs. Give each expected result its independent basis.
+- Material product or architecture decision → present alternatives, tradeoffs, and
+  a recommendation to the authorized decision maker. Routine authorized choices
+  proceed.
 
-Draft observable acceptance criteria and exclusions for the selected owner.
-Use existing criterion IDs where present. For each behavior, describe the expected
-result and the independent basis for that expectation.
+**Checkpoint 3:** each criterion is observable, and each material decision is
+accepted or explicitly pending. A pending decision blocks readiness.
 
-For material product or architecture decisions, present the relevant alternatives,
-tradeoffs, and recommendation to the authorized decision maker. Proceed with
-routine choices already authorized.
+## 4. Slices and verification
 
-Done when each criterion describes an observable result and material decisions
-are accepted or explicitly pending. A pending decision does not establish readiness.
+- Per slice: affected areas, prerequisites, expected result, tests, and required
+  docs. A small change is one slice. Add migration, compatibility, rollout,
+  recovery, or external-dependency work only where needed.
+- Per material risk: the assumption and a disproving check. Separate existing
+  proof from planned verification.
+- Per criterion: checks under the verification rules (existing case IDs, new
+  coverage, original-failure evidence, defect detection). For application runs,
+  name the real interface, readiness and isolation needs, side effects, and
+  evidence-preserving cleanup. Point to project procedures instead of copying
+  commands.
+- Name missing test infrastructure or test-ID mechanisms and propose bounded work;
+  planning installs nothing.
+- Name independent-review needs and specialist triggers, and for each unavailable
+  check, tool, or environment, what would resolve it. A planned check is not a
+  passed check.
 
-## 4. Plan coherent slices and verification
-
-For each slice, name the affected areas, prerequisites, expected result, tests,
-and required documentation. Use one slice for a small change. Include migration,
-compatibility, rollout, recovery, or external dependency work only where needed.
-
-For each material risk, state the assumption that makes the slice safe and the
-check that could disprove it. Distinguish existing proof from planned verification.
-
-Map each criterion to applicable checks under the shared contract. Identify existing
-case IDs, new coverage, original-failure evidence, and how critical checks will
-demonstrate defect detection. For checks that run an application, identify the
-real interface, readiness and isolation needs, relevant side effects, and cleanup
-that retains evidence. Reference existing project procedures rather than copying
-commands into a second authority.
-
-Name missing test infrastructure or test-ID mechanisms and propose bounded work
-to address the gap. Planning does not install them.
-
-Identify independent review needs and specialist triggers. State which required
-checks, tools, or environments are unavailable and what would resolve each gap.
-A planned check is not a passed check.
-
-Done when each criterion has a verification route or explicit gap, each slice has
-an observable end condition, and material risks name an assumption and a check.
-State dependencies and blockers.
+**Checkpoint 4:** every criterion has a verification route or a gap. Every slice has
+an observable end condition, and every material risk an assumption and a check.
+Dependencies and blockers are stated.
 
 ## 5. Return the plan and stop
 
-Use the project's existing plan format and authorized destination. If persistence
-is not authorized, return the draft in the response. Reference existing authorities
-instead of creating duplicate editable requirements.
+Use the project's plan format and authorized destination, else return the draft
+in the response. Reference existing authorities instead of copying requirements.
+Every plan, however small, includes:
 
-Include the outcome, scope, criteria, inspected evidence, decisions, slices with
-tests and documentation, review needs, blockers, and next action. Use the shared
-contract's writing guidance. Keep routine plans short; expand where needed.
+- [ ] Outcome, scope, and exclusions
+- [ ] Acceptance criteria, by ID or source when they exist
+- [ ] Inspected evidence and open questions
+- [ ] Decisions, accepted or pending
+- [ ] Slices with tests and docs
+- [ ] Criterion-to-check map
+- [ ] Review needs, blockers, and next action
+- [ ] Readiness: ready within authorized scope, pending decision, or blocked, with the reason
 
-Report readiness as ready within authorized scope, pending decision, or blocked,
-with the reason. A ready plan is not a new grant of implementation permission.
-When invoked as a standalone planning phase, stop here. A separately authorized
-full-delivery workflow may continue after this phase's conditions are satisfied.
+Keep prose short without dropping an item. A ready plan grants no implementation
+permission. A standalone planning request stops here.

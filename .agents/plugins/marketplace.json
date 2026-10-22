@@ -1,0 +1,20 @@
+{
+  "name": "agent-engineering",
+  "interface": {
+    "displayName": "Agent Engineering"
+  },
+  "plugins": [
+    {
+      "name": "agent-engineering",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

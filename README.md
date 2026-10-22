@@ -10,6 +10,47 @@ Independent review. Your project's rules.
 Use one skill for the next step, or `deliver-change` for the whole workflow.
 **You choose the finish line.**
 
+## In 30 seconds
+
+agent-engineering is a set of portable skills for Codex and Claude Code.
+The skills guide an AI coding agent through a change. The agent plans it,
+implements it, and verifies it with checks based on your requirements. Then it
+requests an independent review and fixes confirmed findings. It follows your
+project's own rules throughout.
+
+- **For:** developers who want a plan, checks, and review before an agent's change ships.
+- **Try:** "Use deliver-change to show a clear error when the signup email is
+  empty. Leave changes uncommitted."
+- **You get:** a plan, the change with check results, and review findings.
+  Missing checks or review are reported as gaps, not as passes.
+- **Publishing:** the agent commits, pushes, and opens a draft PR only when you
+  authorize it and the required checks and review pass.
+
+## How it works
+
+`setup-project` is a separate, optional first step. It records the project
+guidance you accept and then stops. Delivery never runs it automatically.
+
+`deliver-change` runs the phases below in order. Each phase passes its result
+to the next one.
+
+1. **Plan** (`plan-change`): acceptance criteria, slices, and the checks for
+   each criterion. Open product or design decisions come to you before coding.
+2. **Implement** (`implement-change`): the planned edits, tests, and docs for
+   one slice.
+3. **Verify** (`verify-change`): a result for each criterion, including
+   failures and anything left unverified. Steps 2 and 3 repeat for each slice.
+4. **Review** (`review-change`): one or more fresh reviewers who did not write
+   the change check it against your requirements. They return findings with
+   evidence.
+5. **Remediate** (`remediate-findings`, when needed): confirmed findings are
+   fixed, verified again, and reviewed again, for up to three rounds.
+6. **Publish** (`publish-change`): only the operations you authorized, such as
+   commits, a push, and a draft PR that reports the checks and remaining gaps.
+
+`review-pr` reviews an existing PR with the same review phase. It posts
+findings on the PR only when you allow it.
+
 ## Install
 
 **Codex CLI**
@@ -140,6 +181,14 @@ account requirement through the submission contact; do not share production acce
 
 Report ordinary problems through [GitHub Issues](https://github.com/otaviobarros/agent-engineering/issues).
 For vulnerabilities, use the private channel in [Security](SECURITY.md).
+
+## About this repository
+
+This repository is a release mirror. The skills are developed, reviewed, and
+evaluated with native agent runs in a private development repository. Each
+release adds one commit here, so the history shows release snapshots only.
+
+Maintained by Otavio Barros. Follow updates on X: [@haddad_](https://x.com/haddad_).
 
 ## Your project. Your rules.
 

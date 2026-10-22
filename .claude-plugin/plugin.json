@@ -1,6 +1,6 @@
 {
   "name": "agent-engineering",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "A playbook for coding agents: plan changes, implement with checks, review independently, and publish within your limits.",
   "author": {
     "name": "Otavio Barros"

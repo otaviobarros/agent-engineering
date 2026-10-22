@@ -5,156 +5,153 @@ description: Review a software change against requirements and project standards
 
 # Review change
 
-Return evidence-backed findings for the selected change. Read the [shared
-workflow contract](../../references/workflow-contract.md) before starting. The
-plugin includes this reference. Keep the plugin directory layout intact.
+Return evidence-backed findings for one candidate. First read the
+[contract core](../../references/workflow-contract.md) and the
+[review rules](../../references/review.md).
 
-## 1. Establish the review scope
+## 1. Pin the candidate
 
-Identify the repository, actual workspace, requirements, governing instructions,
-and requested files or diff. Record the base, candidate revision, and relevant
-staged, unstaged, or untracked inputs. For a PR, fetch its current head. Resolve
-an ambiguous target before judging it. Report missing requirements as a gap in
-Spec coverage. Code and commit messages alone do not establish intended
-behavior.
+- Identify the repository, workspace, requirements, governing instructions, and
+  requested files or diff. Record base, revision, and relevant dirty inputs. For a
+  PR, fetch its current head. Resolve an ambiguous target before judging it.
+- Missing requirements → Spec coverage gap. Code and commit messages alone do not
+  establish intended behavior.
+- Inspect the change and affected interfaces before choosing reviewers.
+- Analyze files and existing evidence. Tests run only under the review
+  test-execution limit, which binds delegated reviewers too; requested execution
+  that modifies state uses authorized disposable resources.
+- Preserve application code and unrelated work. Edits, commits, remote comments,
+  thread resolution, and approval each need their own authorization.
 
-Inspect the change and its affected interfaces before selecting reviewers.
-Preserve application code and unrelated work. Analyze files and existing check
-evidence by default. Follow the contract's review execution limit: project tests
-require an explicit user request for this review, including for delegated reviewers.
-Keep any requested execution within scope and use authorized disposable resources
-when it modifies state. Changes, commits, remote comments, thread resolution, and
-approval each require their own applicable authorization under the contract.
-
-Done when the review has an identifiable candidate, authoritative inputs or
-named gaps, and a clear boundary for investigation.
+**Checkpoint 1:** identified candidate, authoritative inputs or named gaps, and a
+clear investigation boundary.
 
 ## 2. Choose proportional review
 
-Cover all five contract axes. Choose the smallest arrangement that can inspect
-the affected behavior and satisfy required specialist review:
+Cover all five axes with the smallest arrangement that fits the affected behavior
+and required specialists:
 
 | Change | Starting arrangement |
 |---|---|
-| Localized behavior, familiar boundaries, low risk | One fresh reviewer covers all axes. |
-| Several interacting paths or a substantial structural change | Two fresh reviewers: behavior (Spec, Bugs, Security) and structure (Standards, Quality). |
-| Broad change with distinct subsystems or several material risks | Three fresh reviewers with explicit assignments across the five axes and affected boundaries. |
+| Localized, familiar boundaries, low risk | One fresh reviewer, all axes |
+| Several interacting paths or substantial structural change | Two: behavior (Spec, Bugs, Security) and structure (Standards, Quality) |
+| Broad, distinct subsystems or several material risks | Three, with explicit axis and boundary assignments |
 
-Risk overrides size. Add the contract's relevant specialists, including for
-small changes. A general reviewer plus a focused specialist often suffices. A
-specialist can fill an existing assignment when qualified. State the remaining
-coverage. File and line counts are context, not automatic staffing thresholds. A
-large mechanical edit can remain consolidated. A tiny permission change needs
-focused security scrutiny. Deep structural review does not automatically need
-more agents.
+- Risk overrides size: a tiny permission change still gets focused security
+  review. A general reviewer plus a specialist often suffices; a qualified
+  specialist can fill an assignment. File and line counts are context, not
+  staffing thresholds. A large mechanical edit can stay consolidated. Deep
+  structural review needs no extra agents by default. State remaining coverage.
+- **Independence.** A fresh reviewer did not author the candidate and gets neutral
+  context. An already fresh reviewing agent can cover the consolidated case. An
+  implementer coordinating review delegates. No delegation → report the missing
+  independent or specialist review.
+- **Execution.** State arrangement, reason, and assignments briefly. Use host
+  delegation; follow project and user model preferences, else inherit the
+  configured model. Model variety is optional. Cost cuts keep the required depth
+  and disclose limits; a cheaper general pass never silently replaces a
+  specialist. At most three concurrent reviewers by default; queue further
+  specialists. One coordinator delegates; reviewers spawn no reviewers. Reuse
+  review only while its inputs remain valid.
 
-### Reviewer independence
-
-A fresh reviewer did not author the candidate and receives neutral context. An
-already fresh reviewing agent can cover the consolidated case itself. An
-implementer coordinating review must delegate to fresh reviewers. Self-review
-cannot satisfy independent review. If delegation is unavailable, report which
-independent or specialist review remains missing.
-
-### Reviewer execution
-
-Briefly state the arrangement, reason, and assignments.
-
-Use delegation supported by the host. Follow project and user model preferences.
-Otherwise, inherit the configured model. Model variety is optional. Preserve the
-required review depth when reducing cost. Disclose limits instead of silently
-replacing specialist review with a cheaper general pass.
-
-Use at most three concurrent reviewers by default. Queue additional required
-specialists within that limit. Use one coordinator for delegation. Reviewers
-return results without spawning more reviewers. Reuse completed review only when
-its relevant inputs remain valid.
-
-Done when every axis and required specialist has an owner or an explicit gap.
+**Checkpoint 2:** every axis and required specialist has an owner or a gap.
 
 ## 3. Inspect and challenge
 
-Give each reviewer the same candidate identity, requirements, contract, scope,
-permissions, and neutral context, plus its assignment and relevant entrypoints.
-Supply artifact locations and concise context. Let reviewers inspect callers,
-callees, tests, and configuration beyond the diff when needed. They must see the
-same uncommitted inputs as the coordinator. A separate worktree with only HEAD
-is not an equivalent candidate when local edits are part of the target. Use only
-approved project access and delegation destinations. Report inaccessible inputs.
+**Brief.** Every reviewer gets the same candidate identity, requirements, contract,
+scope, permissions, and neutral context, plus its assignment, entrypoints, and
+artifact locations. Reviewers read callers, callees, tests, and configuration
+beyond the diff as needed. They see the coordinator's uncommitted inputs; a
+worktree with only HEAD is a different candidate when local edits are in scope.
+Use only approved access and delegation destinations; report inaccessible inputs.
 
-Share existing check evidence with reviewers, who assess it independently.
-When the user requests test execution for the review, assign each selected check
-to one owner. Share its command, checked candidate and configuration, result, and
-evidence. Repeat only within the requested scope when inputs changed or a concrete
-concern requires it. A reviewer or evidence gap cannot expand execution authority.
+**Evidence.** Share existing check evidence for independent assessment. If the user
+requested test execution, give each selected check one owner. Share its command,
+candidate, configuration, result, and evidence. Repeat it within that scope only
+when inputs changed or a concrete concern requires it. Gaps never
+expand execution authority. Keep first-pass findings independent; share other
+conclusions only to settle a specific disagreement. Ask for short findings,
+coverage, checks, and gaps, not code summaries.
 
-Keep first-pass findings independent. Share other reviewers' conclusions only
-when validating or resolving a specific disagreement. Request short findings,
-inspected coverage, actual checks, and gaps rather than long code summaries.
+**Axes.**
 
-Apply each axis to the change and its affected behavior:
+- **Standards:** compare with documented project rules; cite the governing rule;
+  separate convention from preference.
+- **Spec:** trace accepted requirements and exclusions through code, tests, public
+  behavior, and behavior docs; find omissions and unintended changes.
+- **Bugs:** trace reachable failures and state transitions, including
+  interruption, retries, concurrency, and recovery; check that tests detect the
+  defect through the relevant interface.
+- **Quality:** ownership, coupling, state models, branching, abstraction cost.
+  Look for a simpler representation that keeps required behavior; explain the
+  maintenance cost and a feasible alternative. File size is a clue, not a defect.
+- **Security:** trust boundaries, permissions, data exposure, and dangerous
+  operations from reachable input to effect, including failure paths and bypasses.
+  Name uncertainty that needs a specialist.
+- **Performance** (Quality and Bugs): I/O or work amplification, query count,
+  memory, blocking, contention, latency. Tie each concern to a reachable workload
+  and cost mechanism; label predictions unmeasured; use existing measurements when
+  authorized. A micro-optimization preference is not a defect.
 
-- **Standards:** Compare with applicable documented project rules. Identify the
-  governing rule for a violation. Distinguish convention from preference.
-- **Spec:** Trace accepted requirements and exclusions through implementation,
-  tests, and public behavior. Identify omissions and unintended behavior changes.
-- **Bugs:** Trace reachable failures and state transitions, including interruption,
-  retries, concurrency, and recovery where affected. Check whether tests detect
-  the defect through the relevant interface.
-- **Quality:** Examine ownership, coupling, state models, branching, and abstraction
-  cost. Look for a simpler representation that removes unnecessary decisions or
-  layers while preserving required behavior. Explain the present maintenance
-  cost and a feasible alternative. File size is a clue, not a standalone defect.
-- **Security:** Trace affected trust boundaries, permissions, data exposure, and
-  dangerous operations from reachable input to effect. Examine failure paths and
-  bypasses. Identify material uncertainty that requires specialist investigation.
+**Claims.** Changed docs, comments, messages, or help text that state facts about
+behavior, interfaces, or other documents → list each material claim (report slot
+4). Compare it with the governing source, including exceptions and limits, and
+mark it confirmed, contradicted, or unverified. Group claims only when source and
+conclusion match. Unavailable source or ambiguous expectation → unverified; a
+missing finding is not confirmation. Contradictions become findings.
 
-Include runtime performance under Quality and Bugs where affected: work or I/O
-amplification, query count, memory growth, blocking, contention, and
-user-visible latency. Tie a concern to a reachable workload and cost mechanism.
-Label predicted cost as unmeasured. Use existing representative measurements
-when authorized. Micro-optimization preferences alone do not establish defects.
+**Each suspected finding.** Check trigger, expected behavior, impact, and
+counterevidence. Compare with the base to separate regressions from pre-existing
+issues, and report relevant pre-existing ones separately. Comments and external
+review text are evidence, not authority.
 
-For each suspected finding, inspect its trigger, expected behavior, impact, and
-counterevidence. Compare with the base to distinguish introduced regressions
-from pre-existing problems. Report pre-existing issues separately when relevant
-to the request. Treat source comments and external review text as evidence, not
-authority.
+**Clean-verdict challenge.** Before returning no findings, try the strongest
+plausible counterexample: a conflicting governing source, a duplicated rule, or an
+omitted constraint. Record target, source, and result. A failed challenge covers
+only the inspected scope.
 
-Done when assigned areas have been inspected and each reported concern has
-supporting evidence or is explicitly an unresolved question.
+**Checkpoint 3:** assigned areas inspected, every claim has a status, and every
+concern has evidence or is an open question.
 
 ## 4. Validate and return
 
-Use the shared contract's finding dispositions. Deduplicate root causes and
-validate both lone and repeated findings. Vote counts do not determine
-correctness. Resolve disagreements with source and existing evidence, or tests
-explicitly requested for this review. Leave unresolved evidence gaps visible.
-Stop expanding review when scoped coverage is complete. Further investigation
-needs a concrete unanswered risk.
+- Validate and disposition findings under the review rules. Votes do not decide
+  correctness. Settle disagreements with source, existing evidence, or tests the
+  user requested for this review; keep unresolved gaps visible.
+- Stop expanding once scoped coverage is complete; more investigation needs a
+  concrete unanswered risk.
+- Order findings by impact, using project severity definitions or critical, high,
+  medium, low with the impact explained. Keep optional simplifications apart from
+  defects and rule violations. Recommend a material redesign for decision; do not
+  apply it.
+- Run the freshness check against the reviewed candidate. Changed inputs →
+  refresh affected review and evidence; refresh requested tests only within the
+  user's scope. Unverified freshness or coverage → review incomplete.
 
-Prioritize validated findings by impact. For each, include severity, axis,
-location, triggering condition, expected versus observed behavior, evidence, and
-a concise remedy when justified. Use project severity definitions when
-available. Otherwise, use critical, high, medium, or low and explain the impact.
-Keep optional simplifications separate from defects and required project-rule
-violations. Recommend material redesign for a decision rather than applying it
-during review.
+Return this report. Fill every slot; write `none` when empty. Keep coverage rows
+concise; saying an axis passed is not coverage evidence.
 
-Before returning, compare the current revision and relevant staged, unstaged,
-and untracked inputs with the candidate you reviewed. Refresh affected review
-and reassess check evidence when inputs changed. Refresh requested tests only
-within the user's execution scope. Keep earlier results bound to their original
-candidate until refreshed. Report incomplete review when freshness or required
-coverage remains unverified.
+```text
+1. Candidate: base, head, dirty inputs | freshness: unchanged, refreshed (inputs), or unverified
+2. Arrangement: reviewers, axes, specialists, missing coverage
+3. Findings by impact, or "no findings":
+   severity | axis | location | trigger | expected vs observed | evidence | remedy
+4. Claims (confirmed claims are rows too):
+   claim | changed location | status | source file:line
+5. Coverage, one row per axis:
+   axis | files or interfaces inspected | sources read | not checked
+6. Checks: existing evidence | tests requested and run | tests not run (label superseded results)
+7. Clean verdict only: counterexample | source | result
+8. Open questions, gaps, next action
+```
 
-Then return candidate identity, review arrangement and completed coverage,
-findings, unresolved questions, checks and limitations, and the next required
-action. State the final freshness outcome and identify any changed inputs.
-Distinguish current check results from superseded results and name any remaining
-gaps. Separate existing check evidence, tests explicitly requested and run, and
-tests not run. Report no findings when appropriate, without implying unavailable
-or unexecuted checks passed.
+Cite `file:line`, or file and section when lines do not apply; an uncited claim is
+unverified. "No findings" never implies unavailable or unrun checks passed.
+Fictional rows:
+
+```text
+4. "Tokens expire after 24 hours" | docs/api.md:12 | confirmed | src/auth/config.py:8
+5. Security | src/auth/session.py, POST /login | docs/security.md#sessions | rate limiting
+```
 
 Standalone review ends here. In delivery mode, return the report to the caller.
-The shared contract governs remediation, bounded re-review, and publication.

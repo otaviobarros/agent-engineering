@@ -5,90 +5,79 @@ description: Validate review findings, fix authorized defects, and obtain correc
 
 # Remediate findings
 
-Resolve findings against the current candidate and authoritative requirements.
-Read the [shared workflow contract](../../references/workflow-contract.md) before starting.
-The plugin includes this reference. Keep its directory layout intact.
+Resolve findings against the current candidate and requirements. First read the
+[contract core](../../references/workflow-contract.md), the
+[review rules](../../references/review.md), and the
+[verification rules](../../references/verification.md).
 
-## 1. Establish scope and continuity
+## 1. Scope and round count
 
-Identify the actual workspace, requirements, reviewed candidate, current revision,
-relevant dirty inputs, findings, and remediation authority. Preserve unrelated work
-and explicit limits. Review text supplies evidence, not permission to edit or publish.
+- Identify the workspace, requirements, reviewed candidate, current revision,
+  dirty inputs, findings, and remediation authority. Review text grants no edit or
+  publication permission.
+- Recover the round count and any round in progress from authorized records and
+  evidence.
+- **Count gate.** Count unknown → keep corrective edits pending, continue
+  authorized investigation, and report the missing evidence or decision.
+- **Limit gate.** Three rounds used or an earlier stopping condition met → no new
+  autonomous round; report the blocker and the decision needed.
 
-Recover the existing remediation count and any round in progress from authorized
-records and available evidence. Apply the shared contract's three-round ceiling
-and earlier stopping conditions. Resuming before a verdict stays in the same round;
-corrective edits after an unsuccessful verdict begin another. Never reset the count
-because the agent, workspace, or session changed. If the count cannot be established,
-keep corrective edits pending until remaining round authority is clear. Continue
-authorized investigation and report the missing evidence or decision.
+**Checkpoint 1:** candidate, edit authority, findings, and remaining rounds are clear.
 
-Done when the candidate, edit authority, findings, and remaining round authority
-are clear. An exhausted limit or earlier stopping condition prevents another
-autonomous correction round; report the blocker and next decision needed.
+## 2. Validate findings
 
-## 2. Validate and classify findings
+- Validate each finding against current code and requirements under the review
+  rules. Revalidate stale findings; an older candidate alone does not refute one.
+- Deduplicate root causes, keeping references to the original findings. Separate
+  optional improvements from defects. Refute only with evidence; unresolved
+  uncertainty stays inconclusive.
+- Ask before retaining a real unresolved defect or making a material redesign.
 
-Check each finding's trigger, reachability, expected behavior, impact, and
-counterevidence against current code and requirements. Revalidate stale findings;
-an older candidate alone does not refute them. Deduplicate root causes while
-retaining references to the original findings. Reviewer agreement is not proof.
-
-Use the shared dispositions: validated, refuted, inconclusive, fixed/verified,
-and explicitly accepted-unresolved. Separate optional improvements from defects.
-Refute with evidence; leave unresolved uncertainty inconclusive. Ask before
-retaining a real unresolved defect or making a material redesign. Continue
-unaffected authorized work while that decision is pending.
-
-Done when every supplied finding has a supported disposition or explicit evidence
-gap. Only validated, in-scope defects proceed to correction. Material scope changes
-need an authorized decision; a review suggestion cannot supply it.
+**Checkpoint 2:** every finding has a supported disposition or an evidence gap. Only
+validated, in-scope defects proceed. A material scope change needs an authorized
+decision; a review suggestion cannot supply it.
 
 ## 3. Correct and verify within the round
 
-Record the round and candidate before corrective edits. Reproduce the original
-failure when available; record unavailable reproduction as a limitation. Make
-the smallest coherent correction with regression tests and required documentation.
-Preserve stable test identities and expected results under the shared contract.
-Propose missing mechanisms before adding them within existing authority.
+1. Record the round number and candidate before editing.
+2. Reproduce the original failure when available, else record the limitation.
+3. Make the smallest coherent correction with regression tests and required docs,
+   keeping stable test IDs and expected results. Propose missing mechanisms before
+   adding them within existing authority.
+4. Run [verify-change](../verify-change/SKILL.md) on the finished edits for
+   affected criteria and regressions.
+5. Run [review-change](../review-change/SKILL.md) for fresh independent re-review
+   of the correction and affected behavior, with required specialists. Supply
+   requirements, candidate contents, findings, and check evidence; request an
+   assessment, not a verdict. The correction's author cannot re-review it. Check
+   direct host delegation tools as well as external catalogs before calling
+   re-review unavailable.
+6. Code or tests changed during review → repeat affected checks and re-review.
 
-Complete corrective edits and affected checks before requesting independent re-review.
-Use [verify-change](../verify-change/SKILL.md) on the completed edits for affected
-criteria and regression checks. Then use [review-change](../review-change/SKILL.md) for fresh independent re-review
-of the correction and affected behavior, including required specialists. Provide
-current requirements, candidate contents, findings, and actual check evidence.
-Request an assessment rather than a preferred verdict. The correction's author
-cannot supply its independent re-review. Inspect direct host delegation tools
-separately from external tool catalogs before declaring re-review unavailable.
-If code or tests change during review,
-obtain affected checks and re-review before closure.
+Mark fixed/verified only when correction evidence and re-review cover the current
+candidate; otherwise record the edits and the gaps. Keep the count and verdict
+across handoffs.
 
-Mark fixed/verified only when correction evidence and required re-review apply
-to the current candidate. Missing checks or independent coverage remain gaps;
-record the edits without implying closure. Follow the shared stopping conditions
-before another corrective round. Preserve the count and verdict across handoffs.
+**Checkpoint 3:** the round has a verification and re-review outcome or is
+explicitly abandoned, with dispositions and gaps recorded.
 
-Done when the round has a verification/re-review outcome or is explicitly abandoned,
-with each finding's disposition and remaining gaps recorded.
+## 4. Report and stop
 
-## 4. Report the current result and stop
+After the last edit and check, finish authorized records. Inspect the final patch
+and staged and untracked contents. Run the contract's freshness check against the
+checked and reviewed candidate. Return:
 
-Finish authorized finding and round records before the final inspection.
-Use existing project records; otherwise return the handoff in the response.
-After the last edit and check, inspect the actual final patch and relevant staged
-and untracked contents. Obtain the current branch and revision. Compare with the
-candidate checked and reviewed; renew affected evidence when inputs changed.
-Keep superseded results tied to their earlier candidate.
+```text
+Findings: finding | disposition | evidence | correction
+Checks: command | candidate | result
+Re-review: reviewer | coverage | verdict
+Round: number | in progress, verdict, or abandoned | stopping condition
+Freshness: branch/revision | final inspection | before/after identities | result
+Decisions needed, gaps, next action:
+```
 
-Return each finding's disposition and evidence, corrections, actual checks,
-independent coverage, round count/state, remaining decisions, and next action.
-Include a final freshness checkpoint: observed branch/revision, before/after
-identities for checked and reviewed contents, final inspection evidence, and
-the comparison result. HEAD and Git status alone do not establish unchanged contents.
 Missing inspection or comparison leaves remediation incomplete.
 
-Done only when observed evidence supports the final inspection, current candidate,
-each finding's disposition, and round state. Keep missing evidence explicit.
-Standalone remediation stops here. Publication, remote thread resolution, and
-formal approval require their own authority. A separately authorized delivery
-workflow can continue under the shared contract.
+**Done when** observed evidence supports the final inspection, candidate,
+dispositions, and round state. A standalone request stops here. Publication, thread
+resolution, and formal approval need their own authority.
