@@ -121,7 +121,8 @@ concern has evidence or is an open question.
 - Stop expanding once scoped coverage is complete; more investigation needs a
   concrete unanswered risk.
 - Order findings by impact, using project severity definitions or critical, high,
-  medium, low with the impact explained. Keep optional simplifications apart from
+  medium, low with the impact explained. Label each finding Important, Nit, or
+  Pre-existing under the review rules. Keep optional simplifications apart from
   defects and rule violations. Recommend a material redesign for decision; do not
   apply it.
 - Run the freshness check against the reviewed candidate. Changed inputs →
@@ -135,7 +136,7 @@ concise; saying an axis passed is not coverage evidence.
 1. Candidate: base, head, dirty inputs | freshness: unchanged, refreshed (inputs), or unverified
 2. Arrangement: reviewers, axes, specialists, missing coverage
 3. Findings by impact, or "no findings":
-   severity | axis | location | trigger | expected vs observed | evidence | remedy
+   label | severity | axis | location | trigger | expected vs observed | evidence | remedy
 4. Claims (confirmed claims are rows too):
    claim | changed location | status | source file:line
 5. Coverage, one row per axis:

@@ -70,7 +70,13 @@ rule for standards findings; mark optional advice nonblocking. Use direct
 
 > issue (blocking, P1, security): Check ownership before returning the invoice
 
-**Summary:** base and head, verified coverage, finding counts with thread
+Map review-change's labels to decorations: Important → `blocking`, Nit →
+`nitpick (non-blocking)`, Pre-existing → `(non-blocking, pre-existing)`. On
+re-review, follow the review rules' re-review scope and post no thread that
+repeats an earlier one.
+
+**Summary:** start with the finding counts by label, and say plainly when nothing
+needs fixing. Then base and head, verified coverage, finding counts with thread
 references, checks, limitations, and decision. Reference findings rather than
 repeat them. Separate incomplete required verification from limits outside the
 agreed scope.
