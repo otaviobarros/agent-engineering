@@ -19,7 +19,11 @@ Return a compact map: area, representative paths, observed pattern, documented a
 confidence or unresolved question. Add coverage, excluded areas, and specific documentation
 gaps or improvement candidates with evidence. Read-only discovery inspects commands;
 it does not run project tests, bootstrap scripts, or remote operations.
-Report implementation/documentation conflicts rather than choosing the implementation as policy.
+The user's request and project instructions and standards govern, under the host's
+instruction hierarchy. As evidence of what is enforced, weigh tool configuration and CI
+first, then ADRs and docs, then the dominant code pattern as observation only. Report
+conflicts with confidence and counterexample paths. Never resolve them by choosing the
+implementation or a tool configuration as policy.
 The setup owner checks material evidence and owns the recommendations and interview.
 
 ## Documentation baseline
@@ -31,7 +35,7 @@ in monorepos. Mark a missing topic as a gap, or not applicable with a reason.
 
 | Topic | Useful documented outcome | Recommendation when missing |
 |---|---|---|
-| Purpose and architecture | Product purpose, main modules, dependencies, ownership, and important constraints | Draft a concise map from inspected code; confirm uncertain intent |
+| Purpose and architecture | Product purpose, important constraints, and a navigation map: each area's entry files, owner, and non-obvious rules | Draft the map from inspected code, linking files instead of narrating modules; confirm uncertain intent |
 | Engineering standards | Index of applicable rules with task/path triggers and exceptions | Propose a small index; stable IDs for rules that need references, preserving existing IDs |
 | Verification | Check catalogs, working directories, important behavior, test identity rules, and real-interface procedures | Link executable configuration; propose missing procedures without implementing a harness |
 | Work and collaboration | Requirements owner, tracker or local alternative, commit/branch/PR conventions | Ask unresolved choices; a hosted tracker and stacked PRs are optional |
@@ -56,7 +60,8 @@ does not grant permissions or replace standards, accepted ADRs, or task requirem
 Use a short scope statement and a source table. Each row answers: what concern,
 when it applies, and which repository-relative file/section owns it. For a monorepo,
 include the package scope and its instruction entrypoint; root rules do not erase
-applicable local rules. Relative links resolve from the guide's directory, not repo root.
+applicable local rules. Put area-specific rules in that area's instruction file or a
+path-scoped rule file the host supports. Relative links resolve from the guide's directory, not repo root.
 
 Map baseline topics to their existing owners where available:
 
@@ -81,7 +86,8 @@ Attribute the selection to an explicit user choice or an existing accepted recor
 not an inference from the requirement to respect project authorities.
 
 Use a short table for relevant practices: practice, disposition, source or decision
-reference, scope and rationale. Mark each practice as:
+reference, enforcement (lint rule, CI check, hook, CODEOWNERS, or prose only), scope
+and rationale. Mark each practice as:
 
 - **Established**: governed by an existing source; link to that owner.
 - **Accepted**: an explicitly adopted setup choice without another owner; record why.
@@ -164,10 +170,10 @@ Purpose: find current project authorities. This map grants no execution permissi
 Approach: Preserve and complement existing standards (selected by the user).
 Workflow selection: On demand (selected by the user).
 
-| Practice | Disposition | Source or decision | Scope and rationale |
-|---|---|---|---|
-| Engineering rules | Established | [Standards index](engineering.md) | Applicable paths; preserve existing IDs |
-| Standards navigation | Proposed | No adoption decision | Add reading triggers if rules become hard to find; no work blocked |
+| Practice | Disposition | Source or decision | Enforcement | Scope and rationale |
+|---|---|---|---|---|
+| Engineering rules | Established | [Standards index](engineering.md) | Lint and CI | Applicable paths; preserve existing IDs |
+| Standards navigation | Proposed | No adoption decision | Prose only | Add reading triggers if rules become hard to find; no work blocked |
 
 Add accepted setup choices only when they have no other owner. Name material pending
 choices and their actual blockers. The example rows are illustrative, not adopted policy.
@@ -190,6 +196,9 @@ Each phase follows applicable pointers and reads current sources before relying 
 them. A missing source or conflicting claim leaves that topic unresolved; keep
 unaffected work moving. The map's existence is not evidence that tests passed.
 
-On refresh, update stale routing and remove obsolete setup-owned statements while
+On refresh, check that every linked path, named section, and listed command still
+exists, and flag statements that contradict another source. Propose a rule for a
+review finding that recurs across changes. Update stale routing and remove obsolete
+setup-owned statements while
 preserving user edits and accepted decisions. Ask when a source changed a material
 decision; do not silently replace it. A complete existing map may need no changes.

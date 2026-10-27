@@ -41,13 +41,15 @@ decision; a review suggestion cannot supply it.
 
 1. Record the round number and candidate before editing.
 2. Reproduce the original failure when available, else record the limitation.
-3. Make the smallest coherent correction with regression tests and required docs,
+3. Correct every instance of a defect class in this round.
+   Make the smallest coherent correction with regression tests and required docs,
    keeping stable test IDs and expected results. Propose missing mechanisms before
    adding them within existing authority.
 4. Run [verify-change](../verify-change/SKILL.md) on the finished edits for
    affected criteria and regressions.
 5. Run [review-change](../review-change/SKILL.md) for fresh independent re-review
-   of the correction and affected behavior, with required specialists. Supply
+   of the correction and affected behavior, scoped by the review rules'
+   re-review section, with required specialists. Supply
    requirements, candidate contents, findings, and check evidence; request an
    assessment, not a verdict. The correction's author cannot re-review it. Check
    direct host delegation tools as well as external catalogs before calling

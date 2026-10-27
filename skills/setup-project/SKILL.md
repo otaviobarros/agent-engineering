@@ -35,6 +35,12 @@ publication need separate authority.
 - You own validation: verify policy sources and the evidence behind material
   observations before using them, reading more files when a report lacks evidence.
   A delegate's summary is not project authority.
+- The user's request and project instructions and standards govern, under the
+  host's instruction hierarchy. For what is enforced, weigh evidence in this
+  order: tool configuration and CI (linters, formatters, type checks, workflows),
+  then ADRs and docs, then the dominant code pattern as observation only. Report
+  a conflict with confidence and counterexample paths. Never resolve it by
+  choosing the code or a tool configuration as policy.
 - Separate documented policy, observed implementation, and unverified claims. A
   remote URL does not establish tracker, authentication, or permission; reading a
   command does not prove it passes. Inspect setup procedures without running
@@ -115,13 +121,24 @@ Unaffected discovery continues meanwhile.
 - Map each topic to its source and reading trigger. Topics: package scope,
   standards, architecture and ADRs, requirements and tracker, tests and test
   identities, commit/PR/stack conventions, and safe environment or worktree
-  procedures. Point
-  to command catalogs with their working directory instead of copying commands.
+  procedures. List the commands an agent cannot guess, such as running one test,
+  lint, typecheck, and build, with their working directory and source file. Mark
+  commands not taken from configuration or CI as unverified. Link full catalogs
+  instead of copying them.
+- Write each guide line for something an agent cannot learn quickly from the code:
+  conventions, non-standard practices, commands, owners, and where to look. Link
+  files instead of describing them. Keep the always-loaded entry short and put
+  detail behind links read on demand.
+- Put rules that apply to one area in that area's instruction file or a
+  path-scoped rule file the host supports, not in the root entry.
 - Assess every baseline topic. Reuse owners and write accepted missing content
   within edit authority; a small repository can combine topics. Link actual
   decisions and terms; never fabricate historical ADRs or scaffold empty trees.
   Mark missing sources and open choices.
-- Record the approach, workflow choice, and each practice's disposition. Keep code
+- Record the approach, workflow choice, and each practice's disposition and
+  enforcement: lint rule, CI check, hook, CODEOWNERS, or prose only. Prefer a tool
+  for a rule that must always hold; propose the mechanism as separate work, since
+  setup installs nothing. Keep code
   changes and policy migrations as separate recommendations. Update setup-owned
   content in place and preserve user edits.
 - **Entrypoint pointer**, where authorized and needed: add one short line to the
@@ -145,7 +162,8 @@ edits match the user's acceptance.
    count. Git's ordinary diff omits new untracked files.
 3. Confirm scoped rules and existing IDs are intact. Remove stale claims instead of
    changing sources to fit.
-4. Confirm command entries are catalog references with working directories.
+4. Confirm each listed command names its working directory and source file, and
+   that every linked path and section exists.
 5. Inspect the final diff, staged and untracked contents, branch, revision, and
    preserved user work. A timestamp or HEAD alone does not establish contents.
 

@@ -24,9 +24,21 @@ authority, or a clear blocker.
 ## 2. Ground the slice
 
 - Trace affected entrypoints, callers, contracts, test procedures, and executable
-  check configuration. Pick the smallest coherent changes and the plan's checks,
-  following project conventions and existing interfaces. Material redesign or
-  scope expansion → get a decision.
+  check configuration. Follow project conventions and existing interfaces; use
+  the plan's checks. Material redesign or scope expansion → get a decision.
+- After reading affected code, follow this reuse-first ladder. Take the first
+  option that fully meets the accepted criteria:
+  1. Skip what the request does not need, including unrequested features and
+     speculative options; name what you skip.
+  2. Search the codebase for an existing helper or pattern before writing a helper,
+     parser, formatter, or validator. State what you found or did not find;
+     reuse it the way surrounding code does.
+  3. Use a standard library or platform feature.
+  4. Use an installed dependency. Never add one for a few lines.
+  5. Otherwise, write the minimum code that works.
+
+  Never cut validation at trust boundaries, error handling that prevents data
+  loss, security, or accessibility. New non-trivial logic still needs a test.
 - Bug fix → capture original-failure evidence before corrective edits when
   available; otherwise state the limitation.
 
@@ -66,6 +78,9 @@ Not verified: criteria whose required check did not run, and why
 Final inspection: branch, revision, dirty inputs, scope and preservation result
 Remaining work, gaps, next action:
 ```
+
+If the task mentions speculative or future needs, include a `Not built: …`
+line naming what you left out.
 
 Carry `Not verified` into any status the user asks for.
 

@@ -109,3 +109,21 @@ completed phase can leave delivery incomplete. In plans and records, name the
 actor when responsibility could be unclear and keep conditions beside their
 actions. Preserve permissions, exceptions, numbers, and uncertainty. State
 completion as observable results.
+
+## Writing
+
+For PR descriptions, review comments, reports, commit messages, docs, and code
+comments you write, say it once in the fewest words that preserve correctness.
+These rules never widen scope or justify editing existing text.
+PR descriptions: at most 5 lines of what changed and why, then how it was
+verified.
+Commit subjects: imperative, at most 72 characters. Add a body only when the why
+is not obvious.
+Skip comments about implementation details. Keep intent or contract comments to
+one or two lines. Never narrate the change. Don't rewrite comments the change
+didn't invalidate.
+Use plain words and name the real symbol, file, or number. Avoid delve, robust,
+seamless, comprehensive, crucial, "in order to", and "not just X but Y". No
+filler, praise, hedging, emojis, or em dashes.
+Cut every sentence with no fact, decision, or instruction. Brevity never drops
+evidence, result states, uncertainty, or a gap Reporting requires.

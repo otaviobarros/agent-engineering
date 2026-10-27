@@ -70,7 +70,11 @@ rule for standards findings; mark optional advice nonblocking. Use direct
 
 > issue (blocking, P1, security): Check ownership before returning the invoice
 
-**Summary:** base and head, verified coverage, finding counts with thread
+Decorate Important findings `blocking`, Nits `non-blocking`, and Pre-existing
+findings `non-blocking, pre-existing`. Post no thread that repeats an earlier one.
+
+**Summary:** open with finding counts by label; say plainly when nothing needs
+fixing. Then base and head, verified coverage, finding counts with thread
 references, checks, limitations, and decision. Reference findings rather than
 repeat them. Separate incomplete required verification from limits outside the
 agreed scope.

@@ -40,6 +40,7 @@ observations from hypotheses, and states what inspection could not establish.
 
 - Draft observable acceptance criteria and exclusions for the owner, reusing
   existing criterion IDs. Give each expected result its independent basis.
+- Choose an approach with the [reuse-first ladder](../implement-change/SKILL.md#2-ground-the-slice).
 - Material product or architecture decision → present alternatives, tradeoffs, and
   a recommendation to the authorized decision maker. Routine authorized choices
   proceed.

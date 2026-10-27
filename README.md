@@ -88,7 +88,7 @@ Existing authorities still govern; setup runs no project tests or implementation
 
 Setup is optional and does not run automatically on installation.
 
-## Bring a task. Choose the finish line.
+## Bring a task. Choose the finish line
 
 **Take an issue to a draft PR.** Replace `ISSUE_URL` with a link, or describe the
 change directly.
@@ -190,7 +190,7 @@ release adds one commit here, so the history shows release snapshots only.
 
 Maintained by Otavio Barros. Follow updates on X: [@haddad_](https://x.com/haddad_).
 
-## Your project. Your rules.
+## Your project. Your rules
 
 Setup is optional. Existing project authorities remain in place. Each standalone
 skill stops at its phase boundary. Limits such as “do not commit” persist across
