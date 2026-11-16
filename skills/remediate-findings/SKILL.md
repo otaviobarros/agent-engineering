@@ -1,6 +1,6 @@
 ---
 name: remediate-findings
-description: Validate review findings, fix authorized defects, and obtain correction evidence and fresh re-review. Use after a review or to resume a remediation round. Preserve existing scope and round limits; standalone remediation stops before publication.
+description: Validate review findings, fix authorized defects, and obtain correction evidence and independent re-review. Use after a review or to resume a remediation round. Preserve existing scope and round limits; standalone remediation stops before publication.
 ---
 
 # Remediate findings
@@ -42,16 +42,15 @@ decision; a review suggestion cannot supply it.
 1. Record the round number and candidate before editing.
 2. Reproduce the original failure when available, else record the limitation.
 3. Correct every instance of a defect class in this round.
-   Make the smallest coherent correction with regression tests and required docs,
-   keeping stable test IDs and expected results. Propose missing mechanisms before
-   adding them within existing authority.
+   Make the smallest coherent correction with required docs and a regression
+   test named for the protected behavior. Keep expected results and any adopted
+   test IDs. Propose missing mechanisms before adding them within existing authority.
 4. Run [verify-change](../verify-change/SKILL.md) on the finished edits for
    affected criteria and regressions.
-5. Run [review-change](../review-change/SKILL.md) for fresh independent re-review
-   of the correction and affected behavior, scoped by the review rules'
-   re-review section, with required specialists. Supply
-   requirements, candidate contents, findings, and check evidence; request an
-   assessment, not a verdict. The correction's author cannot re-review it. Check
+5. Run [review-change](../review-change/SKILL.md) for independent re-review of the
+   correction and affected behavior, scoped and assigned by the review rules'
+   re-review section. Supply requirements, candidate contents, the correction
+   delta, findings, and check evidence; request an assessment, not a verdict. Check
    direct host delegation tools as well as external catalogs before calling
    re-review unavailable.
 6. Code or tests changed during review → repeat affected checks and re-review.

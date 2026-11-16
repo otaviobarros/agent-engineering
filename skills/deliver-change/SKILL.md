@@ -39,10 +39,7 @@ and report the gap.
 
 - **Plan.** A revalidated accepted plan satisfies phase 1. Readiness does not
   approve an unresolved product or architecture choice.
-- **Implement and verify.** Run phases 2–3 per coherent slice, including required
-  test-ID validation. Missing validation mechanism → propose its scope, then add a
-  small project-native check within implementation authority, or report a
-  required gap.
+- **Implement and verify.** Run phases 2–3 per coherent slice.
 - **Review.** Supply neutral context, current requirements, and the candidate,
   without a preferred verdict. Self-review never fills independent coverage.
 - **Remediate.** Supply findings, candidate, requirements, edit authority, and the
@@ -53,7 +50,8 @@ and report the gap.
   dispositions, destination, operation permissions, explicit limits, prior
   attempts, and the
   [criterion results](../verify-change/SKILL.md#4-check-freshness-report-and-stop)
-  updated with review evidence. Excluded operations stop; completed work stays.
+  updated with review evidence. Copy the coverage map, gaps, and value cards
+  into the PR body unchanged. Excluded operations stop; completed work stays.
   Mark ready only within authority, after required checks and review pass at the
   current revision.
 

@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "agent-engineering",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A playbook for coding agents: plan changes, implement with checks, review independently, and publish within your limits.",
   "author": {
     "name": "Otavio Barros"
@@ -21,7 +21,7 @@
       "interface": {
         "displayName": "Agent Engineering",
         "shortDescription": "Give your coding agent a playbook.",
-        "longDescription": "Plan clearly. Check the work. Review before you ship. Use nine skills individually or follow the delivery workflow, with explicit scope, evidence, and publication limits.",
+        "longDescription": "Plan clearly. Check the work. Review before you ship. Use twelve skills individually or follow the delivery workflow, with explicit scope, evidence, and publication limits.",
         "developerName": "Otavio Barros",
         "category": "Productivity",
         "websiteURL": "https://github.com/otaviobarros/agent-engineering",

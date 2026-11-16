@@ -49,7 +49,9 @@ criteria. Pre-existing failures are recorded separately.
 
 - Make scoped code, test, and documentation changes; keep accepted behavior
   outside the slice. Apply the verification rules. A bug regression exercises the
-  interface where the original failure occurred.
+  interface where the original failure occurred. Write each added test's value
+  card while its intent is fresh; run a regression test at the base to show it
+  fails by assertion.
 - Reuse project test mechanisms. Propose missing infrastructure and its scope
   before adding it within authority; beyond scope it is a required gap.
 - Dependency installation, migrations, external effects, and experiments need
@@ -74,6 +76,7 @@ record or the response:
 Behavior implemented:
 Criteria affected: (reference the plan)
 Checks: command | candidate | result | limitation
+Value cards: one per added test, per the verification rules' coverage map
 Not verified: criteria whose required check did not run, and why
 Final inspection: branch, revision, dirty inputs, scope and preservation result
 Remaining work, gaps, next action:

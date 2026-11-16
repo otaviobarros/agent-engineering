@@ -55,13 +55,14 @@ accepted or explicitly pending. A pending decision blocks readiness.
   recovery, or external-dependency work only where needed.
 - Per material risk: the assumption and a disproving check. Separate existing
   proof from planned verification.
-- Per criterion: checks under the verification rules (existing case IDs, new
-  coverage, original-failure evidence, defect detection). For application runs,
+- Per criterion: checks under the verification rules (existing tests by file and
+  name, new coverage, original-failure evidence, defect detection). A fixed defect
+  plans a named regression test. For application runs,
   name the real interface, readiness and isolation needs, side effects, and
   evidence-preserving cleanup. Point to project procedures instead of copying
   commands.
-- Name missing test infrastructure or test-ID mechanisms and propose bounded work;
-  planning installs nothing.
+- Name missing test infrastructure and propose bounded work; planning installs
+  nothing.
 - Name independent-review needs and specialist triggers, and for each unavailable
   check, tool, or environment, what would resolve it. A planned check is not a
   passed check.

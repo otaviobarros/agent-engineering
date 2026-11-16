@@ -4,7 +4,7 @@
 
 **From “build this” to a reviewed draft PR.**
 
-Nine skills for **Codex and Claude Code**. Clear plans. Checks you can inspect.
+Twelve skills for **Codex and Claude Code**. Clear plans. Checks you can inspect.
 Independent review. Your project's rules.
 
 Use one skill for the next step, or `deliver-change` for the whole workflow.
@@ -40,9 +40,10 @@ to the next one.
    one slice.
 3. **Verify** (`verify-change`): a result for each criterion, including
    failures and anything left unverified. Steps 2 and 3 repeat for each slice.
-4. **Review** (`review-change`): one or more fresh reviewers who did not write
-   the change check it against your requirements. They return findings with
-   evidence.
+4. **Review** (`review-change`): a fresh reviewer who did not write the change
+   checks it against your requirements and returns findings with evidence.
+   Quick review is the default; experimental deep review requires your explicit
+   request.
 5. **Remediate** (`remediate-findings`, when needed): confirmed findings are
    fixed, verified again, and reviewed again, for up to three rounds.
 6. **Publish** (`publish-change`): only the operations you authorized, such as
@@ -50,6 +51,10 @@ to the next one.
 
 `review-pr` reviews an existing PR with the same review phase. It posts
 findings on the PR only when you allow it.
+`respond-to-review` answers a review on your own PR. It checks each comment
+against the code before it fixes or replies.
+`merge-change` merges a PR only when you authorize it, after it confirms the
+review, checks, and head are current.
 
 ## Install
 
@@ -67,7 +72,7 @@ claude plugin marketplace add otaviobarros/agent-engineering
 claude plugin install agent-engineering@agent-engineering
 ```
 
-Install the complete plugin to keep its shared references. All nine skills can
+Install the complete plugin to keep its shared references. All twelve skills can
 be invoked independently; copying a single skill folder is not supported.
 
 ## Teach it how your project works
@@ -116,6 +121,21 @@ The handoff shows what changed, what was checked, findings, and remaining gaps.
 > If that clean result cannot receive formal approval, leave an explicit approval
 > comment with the reason. Preserve the code.
 
+**Choose the review depth.** A review is quick by default: one reviewer checks
+every area of the change. Changes to authentication or permissions, money, a
+database migration, or a public contract such as an API get an extra focused
+check in either mode. Diff size does not change the mode.
+
+Ask for a "deep review" to try the experimental mode with up to three reviewers
+who split the change by context. Asking for a thorough review alone keeps quick
+mode. `review-pr` also defaults to quick; it forwards your explicit mode request.
+If a current review of the same PR head already exists, `review-pr` posts it
+instead of reviewing again.
+
+Ask for a "quick review" to keep one reviewer. If your agent cannot start other
+reviewers, the review runs quick and reports the missing deep reviewers.
+Each report states which mode ran, why, and how to ask for the other mode.
+
 Reviews analyze your changes and existing check evidence. Tests run during review
 only when you ask. Full delivery still includes verification.
 
@@ -134,7 +154,10 @@ tracker comments, status changes, or task closure.
 | `review-change` | Validated findings with impact and evidence. |
 | `review-pr` | Prioritized PR threads, a concise summary, and a justified review decision. |
 | `remediate-findings` | Confirmed defects corrected, verified, and independently reviewed again. |
+| `diagnose-issue` | A root cause proven by a failing reproduction, and a named regression test for the fix. |
+| `respond-to-review` | Each comment on your PR checked against the code, then fixed or answered with evidence. |
 | `publish-change` | Authorized commits, push, and a draft PR, with remote effects verified. |
+| `merge-change` | A merge with your chosen method after review, checks, and freshness pass, confirmed on the base branch. |
 | `deliver-change` | The full workflow, with your scope and stopping point preserved. |
 
 ## Execution and data handling

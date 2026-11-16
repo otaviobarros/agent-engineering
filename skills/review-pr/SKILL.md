@@ -32,10 +32,14 @@ prior write is uncertain → step 4 first.
 
 ## 2. Assess through review-change
 
-- Run review-change in full for this candidate, with neutral context and the PR's
-  requirements. A green check aggregate does not prove required coverage; keep
-  unavailable checks and missing review explicit. Reuse an assessment only while
-  its candidate and inputs remain valid.
+- Run review-change for this candidate, with neutral context and the PR's
+  requirements. Use its quick default; forward an explicit user request for
+  experimental deep review.
+- A fresh review-change report for the same PR head exists → publish that report
+  instead of reviewing again. Fresh means its candidate, requirements, and inputs
+  still match.
+- A green check aggregate does not prove required coverage; keep unavailable
+  checks and missing review explicit.
 - The PR author's account can publish an independent agent's assessment but
   cannot formally approve its own PR. Account identity is not reviewer
   independence, and an "approval" label cannot replace missing independent review.
@@ -45,20 +49,9 @@ gaps. No findings can still mean an incomplete review.
 
 ## 3. Feedback and decision
 
-Keep review-change's severity. Priority comes from project definitions, else
-[Google Issue Tracker's P0–P4](https://developers.google.com/issue-tracker/concepts/issues#issue_priority):
-
-| Priority | Fix urgency |
-|---|---|
-| P0 | Immediate: broad critical outage, no workaround |
-| P1 | Quick action: substantial impact on users or core work |
-| P2 | Within a reasonable timescale |
-| P3 | When able: limited obstruction or a reasonable workaround |
-| P4 | Eventual improvement |
-
-Justify urgency with demonstrated impact. Priority is neither severity nor
-blocking status: a critical premerge defect need not be P0. Missing material
-context → priority `unknown`.
+Keep review-change's labels; each label sets its thread's blocking status. Add a
+priority only when the project defines a priority scale, and justify it with
+demonstrated impact.
 
 **Threads:** one per distinct validated root cause. An equivalent still-valid
 thread exists → reference it. Anchor to the smallest useful current diff range and
@@ -68,10 +61,12 @@ incorrect result and impact, evidence, remedy when justified. Link the governing
 rule for standards findings; mark optional advice nonblocking. Use direct
 [Conventional Comments](https://conventionalcomments.org/) style:
 
-> issue (blocking, P1, security): Check ownership before returning the invoice
+> issue (blocking, security): Check ownership before returning the invoice
 
 Decorate Important findings `blocking`, Nits `non-blocking`, and Pre-existing
-findings `non-blocking, pre-existing`. Post no thread that repeats an earlier one.
+findings `non-blocking, pre-existing`. Post an inconclusive finding as a
+`question (non-blocking)` thread or a summary item. Post no thread that repeats an
+earlier one.
 
 **Summary:** open with finding counts by label; say plainly when nothing needs
 fixing. Then base and head, verified coverage, finding counts with thread
@@ -81,8 +76,8 @@ agreed scope.
 
 | Assessment | Decision, within authority |
 |---|---|
-| Validated must-fix findings | Request changes, with threads and summary |
-| Validated nonblocking findings only | Comment; report unresolved findings |
+| Validated Important findings | Request changes, with threads and summary |
+| Validated Nits or Pre-existing findings only | Comment; report unresolved findings |
 | No validated findings; required review complete and current | Explicit approval, formal when permitted; suggestions stay nonblocking |
 | Same, formal approval unavailable | Explicit comment-only approval with the reason and actual formal state |
 | Missing required evidence, independence, or freshness | Incomplete-review comment; no approval |

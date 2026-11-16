@@ -25,19 +25,18 @@ gap, and the permitted actions are clear.
 
 - Map each criterion and material risk to checks. Separate checks with valid
   evidence from checks that need a run.
-- **Test-ID gate.** For integration/E2E cases and material regressions, validate
-  stable IDs with the project's generated catalog. Require valid executable
-  evidence that the checker rejects all three: a missing ID, a duplicate ID, and a
-  duplicate definition that test collection can hide. Reuse valid evidence, else
-  probe in authorized disposable copies; add source checks where collection falls
-  short. A handwritten mapping is not validation. Probes impossible in scope →
-  required validation gap.
-- Missing coverage, ID validation, or defect-detection evidence → report the gap
-  and propose scoped work. Editing the candidate, adding infrastructure, or
+- **Traceability.** Cite each covering check by file and test name. Confirm that
+  each fixed defect has a named regression test. Plan each check's evidence level
+  on the [coverage map](../../references/verification.md#coverage-map) ladder.
+- **Adopted test IDs.** The project has adopted a test-ID convention → check ID
+  uniqueness with the project's own mechanism. Mechanism missing or not run →
+  required validation gap. No adopted convention → trace by file and test name only.
+- Missing coverage, defect-detection evidence, or adopted ID validation → report
+  the gap and propose scoped work. Editing the candidate, adding infrastructure, or
   installing dependencies needs implementation authority.
 
 **Checkpoint 2:** each criterion and material risk has evidence, a check to run, or
-a gap. Criterion IDs stay separate from test-case IDs.
+a gap. Criterion IDs stay separate from any test-case IDs.
 
 ## 3. Run
 
@@ -53,25 +52,33 @@ a gap. Criterion IDs stay separate from test-case IDs.
 
 ## 4. Check freshness, report, and stop
 
-Finish the freshness check and return:
+Finish the freshness check and return the report with its
+[coverage map](../../references/verification.md#coverage-map):
 
 ```text
 Candidate checked: revision and content identities
 Freshness: before/after identities | unchanged | changed (renewed checks) | unverified
-criterion | evidence/check | result | limitation
+Coverage map:
+criterion | file::test @ level; ... | result | limitation
+Gaps: criteria with no covering check, or none
+Value cards: one per test the change adds
 Next action:
 ```
 
-One row per requested criterion, using the contract's result states. A criterion
+One row per requested criterion, using the contract's result states. Each level
+rests on a run or citation in this report. Reuse an implementer's value card only
+after checking its `Fails when` claim against the evidence. A criterion
 awaiting independent review is `pending`, with review as the next check; update it
 when review evidence arrives. Every criterion without a supported pass stays a
 visible gap downstream. Fictional example:
 
 ```text
-AC-2 expired reset link refused | test_reset.py::test_expired (AUTH-E2E-007), browser | pass | staging clock only
+AC-2 expired reset link refused | tests/test_reset.py::test_expired_reset_link_is_refused @ defect-detected; browser reset form @ reproduced | pass | staging clock only
+AC-3 reset email sent | tests/test_reset.py::test_reset_email_queued @ substitute | inconclusive | mail relay mocked
 ```
 
-**Done when** every requested criterion has a supported result or a gap. Failed,
+**Done when** every requested criterion has a coverage-map row with a supported
+result or a gap, and every added test has a value card. Failed,
 unavailable, or inconclusive required checks leave dependent delivery incomplete.
 Verification replaces neither independent review nor publication authority. A
 standalone request stops here.
