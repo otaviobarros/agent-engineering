@@ -6,9 +6,9 @@ description: Merge a pull request after checking that review is resolved, requir
 # Merge change
 
 Merge one PR within explicit merge authority, then read back the result. First
-read the [contract core](../../references/workflow-contract.md), the
-[review rules](../../references/review.md), and the
-[publication rules](../../references/publication.md).
+read the [contract core](references/workflow-contract.md), the
+[review rules](references/review.md), and the
+[publication rules](references/publication.md).
 
 ## 1. Target and authority
 

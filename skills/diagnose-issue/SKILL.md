@@ -6,8 +6,8 @@ description: Diagnose a bug, failing check, or unexplained behavior from a worki
 # Diagnose issue
 
 Find why the system fails, prove it, and hand the fix to the next phase. First
-read the [contract core](../../references/workflow-contract.md) and the
-[verification rules](../../references/verification.md).
+read the [contract core](references/workflow-contract.md) and the
+[verification rules](references/verification.md).
 
 ## Evidence levels
 

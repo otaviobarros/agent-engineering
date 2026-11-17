@@ -6,8 +6,8 @@ description: Verify a software change against acceptance criteria. Run relevant 
 # Verify change
 
 Establish what the current candidate demonstrates and what remains unverified.
-First read the [contract core](../../references/workflow-contract.md) and the
-[verification rules](../../references/verification.md).
+First read the [contract core](references/workflow-contract.md) and the
+[verification rules](references/verification.md).
 
 ## 1. Scope
 
@@ -27,7 +27,7 @@ gap, and the permitted actions are clear.
   evidence from checks that need a run.
 - **Traceability.** Cite each covering check by file and test name. Confirm that
   each fixed defect has a named regression test. Plan each check's evidence level
-  on the [coverage map](../../references/verification.md#coverage-map) ladder.
+  on the [coverage map](references/verification.md#coverage-map) ladder.
 - **Adopted test IDs.** The project has adopted a test-ID convention → check ID
   uniqueness with the project's own mechanism. Mechanism missing or not run →
   required validation gap. No adopted convention → trace by file and test name only.
@@ -53,7 +53,7 @@ a gap. Criterion IDs stay separate from any test-case IDs.
 ## 4. Check freshness, report, and stop
 
 Finish the freshness check and return the report with its
-[coverage map](../../references/verification.md#coverage-map):
+[coverage map](references/verification.md#coverage-map):
 
 ```text
 Candidate checked: revision and content identities

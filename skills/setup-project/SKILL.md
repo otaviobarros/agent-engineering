@@ -6,7 +6,7 @@ description: Set up or refresh a project's engineering workflow through codebase
 # Set up project context
 
 Understand the codebase, challenge gaps, and establish useful engineering
-documentation. First read the [contract core](../../references/workflow-contract.md).
+documentation. First read the [contract core](references/workflow-contract.md).
 
 Setup is optional; installing the plugin neither runs it nor authorizes changes.
 Setup discovers code patterns, interviews project owners, and writes accepted

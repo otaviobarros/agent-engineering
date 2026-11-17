@@ -6,8 +6,8 @@ description: Publish a verified, reviewed change through authorized commits, pus
 # Publish change
 
 Publish the current change within the user's authority. First read the
-[contract core](../../references/workflow-contract.md) and the
-[publication rules](../../references/publication.md).
+[contract core](references/workflow-contract.md) and the
+[publication rules](references/publication.md).
 
 ## 1. Scope
 

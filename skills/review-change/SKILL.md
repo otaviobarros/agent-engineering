@@ -6,8 +6,8 @@ description: Review a software change against requirements and project standards
 # Review change
 
 Return evidence-backed findings for one candidate. First read the
-[contract core](../../references/workflow-contract.md) and the
-[review rules](../../references/review.md).
+[contract core](references/workflow-contract.md) and the
+[review rules](references/review.md).
 
 Each tool call resends the whole context, so batch reads: read both references and
 the diff in one command, and the files you need to inspect in as few commands as

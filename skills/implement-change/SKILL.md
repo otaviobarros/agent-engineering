@@ -6,8 +6,8 @@ description: Implement an accepted software change plan with scoped code, tests,
 # Implement change
 
 Produce the authorized changes and usable verification inputs. First read the
-[contract core](../../references/workflow-contract.md) and the
-[verification rules](../../references/verification.md).
+[contract core](references/workflow-contract.md) and the
+[verification rules](references/verification.md).
 
 ## 1. Confirm the plan and authority
 
@@ -59,7 +59,7 @@ criteria. Pre-existing failures are recorded separately.
 - Run relevant development checks within authority and record command, candidate,
   outcome, and limitation. Keep evidence before cleaning up resources you created.
 - Fix scoped defects within the three-round limit in the
-  [review rules](../../references/review.md#remediation-rounds). A blocked
+  [review rules](references/review.md#remediation-rounds). A blocked
   required check leaves unaffected work free to continue.
 
 **Checkpoint 3:** authorized edits, tests, and docs are present, or incomplete items

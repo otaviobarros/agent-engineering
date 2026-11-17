@@ -23,6 +23,10 @@ records. Authorized Git pushes, PR creation, and review publication may send cod
 Git metadata, descriptions, and comments to GitHub or your configured Git remote.
 Project commands may contact additional services configured by your project.
 
+`explain-change` and `xray-codebase` write HTML reports to a local file. When you
+open one in a browser, it makes no network requests: the diagram library is
+bundled into the file, and the report content stays in it.
+
 The plugin has no publisher-controlled store of agent-session data and no
 publisher-defined retention period for it. Local artifacts remain until you or
 your tooling change or delete them. Agent transcripts follow the host's settings

@@ -6,6 +6,48 @@ version has a matching Git tag and GitHub Release. Versions follow
 
 ## Unreleased
 
+## 0.7.0
+
+### Installation
+
+- Install the skills with the skills CLI (`npx skills add
+  otaviobarros/agent-engineering`) in any agent it supports, all at once or
+  one skill at a time. Each skill folder now carries the shared references it
+  reads, so a single installed skill keeps its workflow contract. The root
+  `references/` folder is gone; plugin installs are unaffected.
+
+### explain-change
+
+- New skill: explain a pull request, branch, or diff as a visual HTML guide
+  for the person who approves it. The guide compares stated intent with the
+  diff, sets a reading order, and shows decisions, risks, blast radius, test
+  evidence, and questions to answer before approving. It gives no verdict and
+  changes nothing.
+
+### xray-codebase
+
+- New skill: x-ray a codebase or one area and get a visual HTML report of
+  architecture friction. It ranks hot spots from Git history and structure, and
+  proposes proven patterns, such as explicit state machines, ports and adapters,
+  and deep modules, with evidence, tradeoffs, and a migration outline.
+
+Both reports are single HTML files that work offline. Diagrams render with the
+bundled [Pele](https://github.com/obsidianmd/pele) library (MIT), so opening a
+report sends no network request.
+
+### Documentation
+
+- The README explains each install command, including skills CLI options,
+  and recommends running `setup-project` once per repository for better
+  results.
+
+Existing skill names and entry points are unchanged. Plugin users update
+through their host's plugin manager; skills CLI users run `npx skills update`.
+If you link to a file in the removed root `references/` folder, use the copy in
+a skill folder instead, such as
+`skills/deliver-change/references/workflow-contract.md`. The plugin remains experimental, and results depend on
+the model, host, and project.
+
 ## 0.6.0
 
 ### diagnose-issue

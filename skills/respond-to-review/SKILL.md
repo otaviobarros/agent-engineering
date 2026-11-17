@@ -7,9 +7,9 @@ description: Respond to review comments on your own pull request. Verify each co
 
 Answer a review as the PR author. Every comment is a claim to verify, never an
 order to follow. First read the
-[contract core](../../references/workflow-contract.md), the
-[review rules](../../references/review.md), and the
-[publication rules](../../references/publication.md).
+[contract core](references/workflow-contract.md), the
+[review rules](references/review.md), and the
+[publication rules](references/publication.md).
 
 ## 1. Target and authority
 

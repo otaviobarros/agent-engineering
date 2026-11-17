@@ -6,7 +6,7 @@ description: Implement a software change end to end, from plan to authorized dra
 # Deliver change
 
 Run the full workflow within the user's scope. First read the
-[contract core](../../references/workflow-contract.md); each phase skill reads its
+[contract core](references/workflow-contract.md); each phase skill reads its
 own phase references.
 
 ## 1. Scope

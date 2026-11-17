@@ -7,8 +7,8 @@ description: Plan a software change or revise an existing plan. Define acceptanc
 
 Produce a plan grounded in the project's requirements and current code. Reuse
 accepted decisions and valid plans; keep detail proportional to the change. First
-read the [contract core](../../references/workflow-contract.md) and the
-[verification rules](../../references/verification.md).
+read the [contract core](references/workflow-contract.md) and the
+[verification rules](references/verification.md).
 
 ## 1. Scope and ownership
 

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "groupings": [
+    {
+      "title": "Deliver a change",
+      "description": "Take a task from plan to merged pull request, or run one phase on its own.",
+      "skills": ["deliver-change", "plan-change", "implement-change", "verify-change", "publish-change", "merge-change"]
+    },
+    {
+      "title": "Review",
+      "description": "Review changes and pull requests, fix findings, and answer review comments.",
+      "skills": ["review-change", "review-pr", "remediate-findings", "respond-to-review"]
+    },
+    {
+      "title": "Understand and set up",
+      "description": "Diagnose bugs, explain changes, map architecture, and set up a project's workflow.",
+      "skills": ["setup-project", "diagnose-issue", "explain-change", "xray-codebase"]
+    }
+  ]
+}

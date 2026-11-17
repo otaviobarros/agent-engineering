@@ -41,7 +41,7 @@ Follow the project workflow guide named by applicable instructions, else
 state. The guide owns navigation and otherwise unowned setup choices; project
 authorities still govern. Proposed improvements are not active rules. A guide
 grants no permission and proves no check. Setup is optional: installation and
-delivery never run [setup-project](../skills/setup-project/SKILL.md). Without a
+delivery never run [setup-project](../../setup-project/SKILL.md). Without a
 guide, discover sources normally; material unresolved decisions still block
 dependent work.
 

@@ -7,9 +7,9 @@ description: Review a GitHub pull request through review-change and publish vali
 
 Assess with [review-change](../review-change/SKILL.md), then publish feedback
 within authority. First read the
-[contract core](../../references/workflow-contract.md), the
-[review rules](../../references/review.md), and the
-[publication rules](../../references/publication.md). This skill publishes
+[contract core](references/workflow-contract.md), the
+[review rules](references/review.md), and the
+[publication rules](references/publication.md). This skill publishes
 feedback; it does not remediate.
 
 ## 1. Target and authority

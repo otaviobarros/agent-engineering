@@ -6,9 +6,9 @@ description: Validate review findings, fix authorized defects, and obtain correc
 # Remediate findings
 
 Resolve findings against the current candidate and requirements. First read the
-[contract core](../../references/workflow-contract.md), the
-[review rules](../../references/review.md), and the
-[verification rules](../../references/verification.md).
+[contract core](references/workflow-contract.md), the
+[review rules](references/review.md), and the
+[verification rules](references/verification.md).
 
 ## 1. Scope and round count
 
