@@ -6,6 +6,17 @@ version has a matching Git tag and GitHub Release. Versions follow
 
 ## Unreleased
 
+## 0.7.1
+
+### explain-change and xray-codebase
+
+- Reports with diagrams load the Pele diagram library (1.13.0) from jsDelivr
+  when opened, pinned to that version and checked against a hash. The plugin no
+  longer ships any script files. Opened offline, a diagram shows its source
+  text instead.
+- Reports without diagrams still make no network requests. The privacy policy
+  describes the jsDelivr request.
+
 ## 0.7.0
 
 ### Installation

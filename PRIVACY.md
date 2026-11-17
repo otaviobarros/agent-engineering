@@ -24,8 +24,11 @@ Git metadata, descriptions, and comments to GitHub or your configured Git remote
 Project commands may contact additional services configured by your project.
 
 `explain-change` and `xray-codebase` write HTML reports to a local file. When you
-open one in a browser, it makes no network requests: the diagram library is
-bundled into the file, and the report content stays in it.
+open one that has diagrams, the browser downloads the Pele diagram library from
+jsDelivr (`cdn.jsdelivr.net`). That request sends your IP address and browser
+details to jsDelivr under its own privacy policy, and no report content. The
+script is pinned to one version and checked against a hash. Reports without
+diagrams make no network requests.
 
 The plugin has no publisher-controlled store of agent-session data and no
 publisher-defined retention period for it. Local artifacts remain until you or
@@ -38,6 +41,7 @@ Consult the policies applicable to your host, account, and deployment:
 - [Anthropic privacy policy](https://www.anthropic.com/legal/privacy)
 - [OpenAI privacy policy](https://openai.com/policies/privacy-policy/)
 - [GitHub privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement)
+- [jsDelivr privacy policy](https://www.jsdelivr.com/terms/privacy-policy-jsdelivr-net)
 
 For other Git hosts or project services, review their policies before authorizing
 operations. Avoid providing secrets or personal information that the task does

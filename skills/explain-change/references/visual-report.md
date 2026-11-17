@@ -36,8 +36,9 @@ needs, and give it the element that shows it fastest.
 - Treat the page as shareable. Redact credentials, tokens, personal data, and
   internal hostnames found in source. Escape `<`, `>`, and `&` in every code
   excerpt, label, and diagram source.
-- The page loads nothing from the network: no CDN, fonts, analytics, or remote
-  images. Diagrams render with the bundled Pele library, inlined into the page.
+- The page's one network request is the pinned Pele script from jsDelivr, and
+  only when it has diagrams. Fonts, analytics, remote images, and other scripts
+  stay out. Offline, each diagram shows its source text instead.
 
 ## Page anatomy
 
@@ -95,7 +96,7 @@ test exists.
 Draw a diagram when the reader must see structure that text and tables flatten:
 branches, dependencies, states, order across actors, shares of a whole, or a trend.
 Write Mermaid syntax in a `pre.mermaid` block inside a `.diagram` element; the
-bundled [Pele](pele/pele.global.js) library draws it when the page opens. Pele
+[Pele](https://github.com/obsidianmd/pele) library draws it when the page opens. Pele
 supports every Mermaid type plus its own; pick the type by the question it answers.
 
 Each diagram must earn its place. Before you add one, name the reader's question it
@@ -396,10 +397,11 @@ const update=()=>{const n=boxes.filter(b=>b.checked).length,t=boxes.length;
   boxes.forEach(b=>document.querySelector(`#qlist [data-q="${b.dataset.q}"]`)?.classList.toggle('done',b.checked));};
 boxes.forEach(b=>b.addEventListener('change',update));update();
 </script>
-<!-- pele -->
+<script src="https://cdn.jsdelivr.net/npm/pele@1.13.0/dist/pele.global.js" integrity="sha384-vDPV1LDXGIwjU5/gMUtHbn/WAmwRmOgkQpiq+Rm4d/BPTsdfpIUpvi2xVET6z85W" crossorigin="anonymous"></script>
 <script>
 for (const node of document.querySelectorAll('pre.mermaid')) {
   const box = node.closest('.diagram');
+  if (!window.pele) { box.classList.add('diagram-error'); box.dataset.error = 'Pele did not load'; continue; }
   const source = node.textContent;
   const host = document.createElement('div');
   node.replaceWith(host);
@@ -419,24 +421,13 @@ document.body.dataset.diagrams = 'done';
 </html>
 ```
 
-## Inline the diagram library
+## Load the diagram library
 
-A page with a `pre.mermaid` block needs the library. After you write the page,
-replace the `<!-- pele -->` line with a `<script>` element holding the license
-notices from [`pele/LICENSE`](pele/LICENSE) as a `/*! */` comment, then the full
-text of [`pele/pele.global.js`](pele/pele.global.js). Resolve both from this
-reference's directory. Splice the files with a command; the library is 734 KB, so
-never retype or summarize it:
-
-```bash
-python3 -c "import sys, pathlib; p, lib = sys.argv[1:]; s = open(p).read(); notice = (pathlib.Path(lib).parent / 'LICENSE').read_text(); open(p, 'w').write(s.replace('<!-- pele -->', '<script>/*!\n' + notice + '*/\n' + open(lib).read() + '</script>', 1))" REPORT.html PATH/TO/pele/pele.global.js
-```
-
-Without Python, use any tool that does the same exact replacement. A page without
-diagrams deletes the `<!-- pele -->` line and the rendering script after it. The
-library is Pele 1.13.0 under the MIT license, with Lucide icons under the ISC
-license. Both licenses require their notices in every copy, so a page that holds
-the library also holds `pele/LICENSE`.
+The scaffold loads Pele 1.13.0 (MIT) from jsDelivr with a `<script>` tag. Copy the
+tag exactly: the `integrity` hash makes the browser refuse any other file at that
+URL, so a changed version, URL, or hash breaks every diagram. A page without
+diagrams deletes that tag and the rendering script after it, and then loads
+nothing from the network.
 
 ## Render check
 
@@ -445,10 +436,10 @@ Installing one, or adding files to the project for the check, needs explicit
 authority; probe scripts and screenshots go beside the report.
 
 1. A headless browser is available, such as Playwright with Chromium → open the
-   file with the network blocked. Wait up to 20 seconds for
+   file with network access limited to `cdn.jsdelivr.net`. Wait up to 20 seconds for
    `body[data-diagrams="done"]`, then confirm:
    - every `.diagram` holds an `svg` and `.diagram-error` matches nothing;
-   - the page made no network request;
+   - the only network request is the Pele script, and it succeeded;
    - the first screen at 1280×800 shows the answer and the decision board;
    - after you open one question, its chevron has turned and both answers show.
 
@@ -459,9 +450,8 @@ authority; probe scripts and screenshots go beside the report.
 2. No browser → state the render as unverified and name the reason. Keep the
    diagram source valid by the rules above.
 
-Either way, a page with diagrams passes a text search for `Pele 1.13.0`,
-`Copyright (c) 2026 kepano`, and `Lucide Icons and Contributors`. A miss means
-the splice failed; run it again.
+Either way, a page with diagrams contains the exact `integrity="sha384-vDPV1LDXGIwjU5/gMUtHbn/WAmwRmOgkQpiq+Rm4d/BPTsdfpIUpvi2xVET6z85W"`
+attribute. A miss means the tag was changed; copy it from the scaffold again.
 
 In the response, give the report's absolute path, the render check result with
 the screenshot paths, and the answer and questions as text. Open the file with the

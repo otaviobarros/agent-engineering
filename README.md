@@ -236,9 +236,7 @@ your configured Git remote through connectors, APIs, or CLI tools. Project check
 may also contact services configured by your project. Review the project's tools
 and configuration before authorizing execution.
 
-The HTML reports from `explain-change` and `xray-codebase` are local files. Opening
-one loads nothing from the network; diagrams render with a library bundled into
-the file.
+The HTML reports from `explain-change` and `xray-codebase` are local files.
 
 The publisher receives no agent activity through the plugin itself. Local files,
 host transcripts, and remote records have separate storage and retention rules.
