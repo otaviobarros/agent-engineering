@@ -36,9 +36,9 @@ needs, and give it the element that shows it fastest.
 - Treat the page as shareable. Redact credentials, tokens, personal data, and
   internal hostnames found in source. Escape `<`, `>`, and `&` in every code
   excerpt, label, and diagram source.
-- The page's one network request is the pinned Pele script from jsDelivr, and
-  only when it has diagrams. Fonts, analytics, remote images, and other scripts
-  stay out. Offline, each diagram shows its source text instead.
+- The page's one network request is the pinned Pele script from
+  `cdn.octa.software`, and only when it has diagrams. Fonts, analytics, remote
+  images, and other scripts stay out. Offline, each diagram shows its source text instead.
 
 ## Page anatomy
 
@@ -397,7 +397,7 @@ const update=()=>{const n=boxes.filter(b=>b.checked).length,t=boxes.length;
   boxes.forEach(b=>document.querySelector(`#qlist [data-q="${b.dataset.q}"]`)?.classList.toggle('done',b.checked));};
 boxes.forEach(b=>b.addEventListener('change',update));update();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/pele@1.13.0/dist/pele.global.js" integrity="sha384-vDPV1LDXGIwjU5/gMUtHbn/WAmwRmOgkQpiq+Rm4d/BPTsdfpIUpvi2xVET6z85W" crossorigin="anonymous"></script>
+<script src="https://cdn.octa.software/pele/1.13.0/pele.global.js" integrity="sha384-vDPV1LDXGIwjU5/gMUtHbn/WAmwRmOgkQpiq+Rm4d/BPTsdfpIUpvi2xVET6z85W" crossorigin="anonymous"></script>
 <script>
 for (const node of document.querySelectorAll('pre.mermaid')) {
   const box = node.closest('.diagram');
@@ -423,8 +423,8 @@ document.body.dataset.diagrams = 'done';
 
 ## Load the diagram library
 
-The scaffold loads Pele 1.13.0 (MIT) from jsDelivr with a `<script>` tag. Copy the
-tag exactly: the `integrity` hash makes the browser refuse any other file at that
+The scaffold loads Pele 1.13.0 (MIT) from `cdn.octa.software`, the plugin
+author's host, with a `<script>` tag. Copy the tag exactly: the `integrity` hash makes the browser refuse any other file at that
 URL, so a changed version, URL, or hash breaks every diagram. A page without
 diagrams deletes that tag and the rendering script after it, and then loads
 nothing from the network.
@@ -436,7 +436,7 @@ Installing one, or adding files to the project for the check, needs explicit
 authority; probe scripts and screenshots go beside the report.
 
 1. A headless browser is available, such as Playwright with Chromium → open the
-   file with network access limited to `cdn.jsdelivr.net`. Wait up to 20 seconds for
+   file with network access limited to `cdn.octa.software`. Wait up to 20 seconds for
    `body[data-diagrams="done"]`, then confirm:
    - every `.diagram` holds an `svg` and `.diagram-error` matches nothing;
    - the only network request is the Pele script, and it succeeded;

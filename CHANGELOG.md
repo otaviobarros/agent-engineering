@@ -6,6 +6,15 @@ version has a matching Git tag and GitHub Release. Versions follow
 
 ## Unreleased
 
+## 0.7.2
+
+### explain-change and xray-codebase
+
+- Reports with diagrams now load the Pele diagram library from
+  `cdn.octa.software`, the plugin author's own host, instead of jsDelivr. The
+  file, version, and hash are unchanged. The privacy policy describes the new
+  host.
+
 ## 0.7.1
 
 ### explain-change and xray-codebase
