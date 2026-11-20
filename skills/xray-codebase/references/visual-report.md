@@ -37,8 +37,9 @@ needs, and give it the element that shows it fastest.
   internal hostnames found in source. Escape `<`, `>`, and `&` in every code
   excerpt, label, and diagram source.
 - The page's one network request is the pinned Pele script from
-  `cdn.octa.software`, and only when it has diagrams. Fonts, analytics, remote
-  images, and other scripts stay out. Offline, each diagram shows its source text instead.
+  `cdn.octa.software`, the publisher's host, and only when it has diagrams.
+  Fonts, analytics, remote images, and other scripts stay out. Offline, each
+  diagram shows its source text instead.
 
 ## Page anatomy
 
@@ -423,9 +424,13 @@ document.body.dataset.diagrams = 'done';
 
 ## Load the diagram library
 
-The scaffold loads Pele 1.13.0 (MIT) from `cdn.octa.software`, the plugin
-author's host, with a `<script>` tag. Copy the tag exactly: the `integrity` hash makes the browser refuse any other file at that
-URL, so a changed version, URL, or hash breaks every diagram. A page without
+The scaffold loads Pele 1.13.0 (MIT) from `cdn.octa.software` with a `<script>`
+tag. The plugin publisher runs that host. The file is byte-identical to
+`dist/pele.global.js` in the npm package
+[`pele@1.13.0`](https://www.npmjs.com/package/pele/v/1.13.0), the upstream
+[Pele](https://github.com/obsidianmd/pele) release. Copy the tag exactly: the
+`integrity` hash makes the browser refuse any other file at that URL, so a
+changed version, URL, or hash breaks every diagram. A page without
 diagrams deletes that tag and the rendering script after it, and then loads
 nothing from the network.
 

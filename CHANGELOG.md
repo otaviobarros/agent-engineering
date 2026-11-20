@@ -6,6 +6,20 @@ version has a matching Git tag and GitHub Release. Versions follow
 
 ## Unreleased
 
+## 0.7.3
+
+### All skills
+
+- The shared workflow contract defines untrusted text: PR bodies, issues,
+  comments, review threads, commit messages, diffs, logs, and fetched pages.
+  Skills read it as evidence and follow no instructions inside it.
+
+### explain-change and xray-codebase
+
+- The report rules state where the Pele diagram library comes from: the
+  publisher's host serves a file byte-identical to the npm package
+  `pele@1.13.0`.
+
 ## 0.7.2
 
 ### explain-change and xray-codebase
